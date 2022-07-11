@@ -832,39 +832,39 @@ In this Ontology, the Drug_reference class contains reference individuals for th
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CP1">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
-        <has_drug_reference rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Cyclophosphamide-REF"/>
+        <has_drug_reference rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CyclophosphamideREF"/>
         <Dose rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</Dose>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Capecitabine-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CapecitabineREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Capecitabine-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CapecitabineREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Capecitabine"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Carboplatin-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CarboplatinREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Carboplatin-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CarboplatinREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Carboplatin"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Cyclophosphamide-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CyclophosphamideREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Cyclophosphamide-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CyclophosphamideREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Cyclophosphamide"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Docetaxel-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Docetaxel-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Docetaxel"/>
     </owl:NamedIndividual>
     
@@ -874,15 +874,15 @@ In this Ontology, the Drug_reference class contains reference individuals for th
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#E1">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
-        <has_drug_reference rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Epirubicin-REF"/>
+        <has_drug_reference rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#EpirubicinREF"/>
         <Dose rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">100</Dose>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Epirubicin-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#EpirubicinREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Epirubicin-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#EpirubicinREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Epirubicin"/>
     </owl:NamedIndividual>
     
@@ -892,38 +892,38 @@ In this Ontology, the Drug_reference class contains reference individuals for th
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#F1">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
-        <has_drug_reference rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5fluorouracil-REF"/>
+        <has_drug_reference rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5fluorouracilREF"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Infusion-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#InfusionREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Infusion-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#InfusionREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Infusion"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intramuscular-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IntramuscularREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intramuscular-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IntramuscularREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intramuscular"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intravenous-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IntravenousREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intravenous-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IntravenousREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intravenous"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Paclitaxel-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PaclitaxelREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Paclitaxel-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PaclitaxelREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Paclitaxel"/>
     </owl:NamedIndividual>
     
@@ -939,9 +939,9 @@ In this Ontology, the Drug_reference class contains reference individuals for th
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Pertuzumab-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PertuzumabREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Pertuzumab-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PertuzumabREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Pertuzumab"/>
     </owl:NamedIndividual>
     
@@ -958,17 +958,17 @@ In this Ontology, the Drug_reference class contains reference individuals for th
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Subcutaneous-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#SubcutaneousREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Subcutaneous-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#SubcutaneousREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Subcutaneous"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Trastuzumab-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TrastuzumabREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Trastuzumab-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TrastuzumabREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Trastuzumab"/>
     </owl:NamedIndividual>
     
@@ -984,9 +984,9 @@ In this Ontology, the Drug_reference class contains reference individuals for th
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5fluorouracil-REF -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5fluorouracilREF -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5fluorouracil-REF">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5fluorouracilREF">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5-FU"/>
     </owl:NamedIndividual>
 </rdf:RDF>
