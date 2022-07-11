@@ -473,12 +473,35 @@ In this Ontology, the Drug_reference class contains reference individuals for th
                     </owl:Restriction>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5-FUDrug"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FUDrug"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FU -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FU">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetabolite"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FUDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FUDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FU"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetaboliteDrug"/>
     </owl:Class>
     
 
@@ -794,29 +817,6 @@ In this Ontology, the Drug_reference class contains reference individuals for th
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5-FU -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5-FU">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetabolite"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5-FUDrug -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5-FUDrug">
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5-FU"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetaboliteDrug"/>
-    </owl:Class>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -892,7 +892,15 @@ In this Ontology, the Drug_reference class contains reference individuals for th
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#F1">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
-        <has_drug_reference rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5fluorouracilREF"/>
+        <has_drug_reference rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Fluorouracil5REF"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Fluorouracil5REF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Fluorouracil5REF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FU"/>
     </owl:NamedIndividual>
     
 
@@ -980,14 +988,6 @@ In this Ontology, the Drug_reference class contains reference individuals for th
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour"/>
         <IDC10-Code>C509</IDC10-Code>
         <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003620</TumourID>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5fluorouracilREF -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5fluorouracilREF">
-        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#5-FU"/>
     </owl:NamedIndividual>
 </rdf:RDF>
 
