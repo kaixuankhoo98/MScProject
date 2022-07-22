@@ -67,6 +67,7 @@ In this Ontology, the Drug_reference class contains reference individuals for th
     <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#part_of_regimen"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
     </owl:ObjectProperty>
@@ -87,6 +88,15 @@ In this Ontology, the Drug_reference class contains reference individuals for th
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_tumour">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#part_of_regimen -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#part_of_regimen">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
     </owl:ObjectProperty>
     
 
@@ -125,7 +135,15 @@ In this Ontology, the Drug_reference class contains reference individuals for th
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DateOfBirth">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment>Patient date of birth</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DiagnosisDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DiagnosisDate">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour_data"/>
     </owl:DatatypeProperty>
     
 
@@ -148,11 +166,20 @@ In this Ontology, the Drug_reference class contains reference individuals for th
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IDC10-Code -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IDC10_Code -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IDC10-Code">
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IDC10_Code">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour_data"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IsAlive -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IsAlive">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
     </owl:DatatypeProperty>
     
 
@@ -162,6 +189,7 @@ In this Ontology, the Drug_reference class contains reference individuals for th
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PatientID">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>Unique patient ID number</rdfs:comment>
     </owl:DatatypeProperty>
     
 
@@ -170,6 +198,16 @@ In this Ontology, the Drug_reference class contains reference individuals for th
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PrimaryDiagnosis -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PrimaryDiagnosis">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>IDC10 Code for the primary diagnosis</rdfs:comment>
     </owl:DatatypeProperty>
     
 
@@ -191,6 +229,21 @@ In this Ontology, the Drug_reference class contains reference individuals for th
     
 
 
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Sex -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Sex">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>One of the following options:
+0 = Not known
+1 = Male
+2 = Female
+9 = Not specified
+4000 = Indeterminate</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TumourID -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TumourID">
@@ -204,6 +257,19 @@ In this Ontology, the Drug_reference class contains reference individuals for th
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour_data">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#VitalStatus -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#VitalStatus">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Can be any of the following:
+A = Alive
+D = Dead
+X = Exit Posting</rdfs:comment>
     </owl:DatatypeProperty>
     
 
@@ -986,7 +1052,7 @@ In this Ontology, the Drug_reference class contains reference individuals for th
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour1">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour"/>
-        <IDC10-Code>C509</IDC10-Code>
+        <IDC10_Code>C509</IDC10_Code>
         <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003620</TumourID>
     </owl:NamedIndividual>
 </rdf:RDF>
