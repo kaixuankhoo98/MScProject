@@ -166,9 +166,9 @@ In this Ontology, the Drug_reference class contains reference individuals for th
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IDC10_Code -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#ICD10_Code -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IDC10_Code">
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#ICD10_Code">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour_data"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
@@ -1052,7 +1052,7 @@ X = Exit Posting</rdfs:comment>
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour1">
         <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour"/>
-        <IDC10_Code>C509</IDC10_Code>
+        <ICD10_Code>C509</ICD10_Code>
         <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003620</TumourID>
     </owl:NamedIndividual>
 </rdf:RDF>
