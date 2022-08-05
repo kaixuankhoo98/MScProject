@@ -16,7 +16,7 @@ class CancerOntology:
         """
         Reasons with pellet.
         """
-        with self.onto: sync_reasoner_pellet()
+        with self.onto: sync_reasoner()
 
     def reload(self, onto):
         """
@@ -45,7 +45,13 @@ def test2():
     o2.add_data(test_data)
     # print(o2.onto.Regimen.instances())
 
-test2()
+def test3():
+    o3 = CancerOntology()
+    o3.add_data(test_data)
+    o3.reason()
+    print(o3.onto.DocetaxelDrug.instances())
+
+test3()
 
 # o1.reason()
 # print(o1.onto.E1.has_drug_reference)
