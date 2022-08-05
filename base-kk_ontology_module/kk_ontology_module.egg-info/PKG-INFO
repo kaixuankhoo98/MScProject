@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: kk-ontology-module
+Version: 0.0.1
+Summary: Cancer Ontology
+Home-page: UNKNOWN
+Author: Kaixuan Khoo
+Author-email: <kaixuan.khoo.98@gmail.com>
+License: UNKNOWN
+Description: A packaged set of functions for ontology-based reasoning of cancer patients
+Keywords: python,ontology,cancer
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Education
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows

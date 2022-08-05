@@ -1,0 +1,7 @@
+setup.py
+kk_ontology_module/__init__.py
+kk_ontology_module.egg-info/PKG-INFO
+kk_ontology_module.egg-info/SOURCES.txt
+kk_ontology_module.egg-info/dependency_links.txt
+kk_ontology_module.egg-info/requires.txt
+kk_ontology_module.egg-info/top_level.txt
