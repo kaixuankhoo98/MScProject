@@ -2,7 +2,7 @@ from owlready2 import *
 from load_data import load_data, TEST_DATA
 from load_onto import load_onto, TEST_ONTO
 from map_data import map_data
-import gc
+from datamanip import to_pandas
 
 test_onto = load_onto(TEST_ONTO) #default ontology
 test_data = load_data(TEST_DATA)
@@ -25,11 +25,10 @@ class CancerOntology:
         """
         del self.onto
         print("Previous ontology deleted.")
-        gc.collect()
         self.onto = onto
         print("New ontology loaded.")
     
-    def add_data(self, data):
+    def define_data(self, data):
         self.data = data
         map_data(self.onto, data)
 
@@ -42,16 +41,22 @@ def test1():
 
 def test2():
     o2 = CancerOntology()
-    o2.add_data(test_data)
+    o2.define_data(test_data)
     # print(o2.onto.Regimen.instances())
 
 def test3():
     o3 = CancerOntology()
-    o3.add_data(test_data)
+    o3.define_data(test_data)
     o3.reason()
     print(o3.onto.DocetaxelDrug.instances())
 
-test3()
+def test4():
+    o4 = CancerOntology()
+    o4.define_data(test_data)
+    o4.reason()
+    print(to_pandas(test_data, o4.onto.TaxaneContainingRegimen))
+
+test4()
 
 # o1.reason()
 # print(o1.onto.E1.has_drug_reference)
