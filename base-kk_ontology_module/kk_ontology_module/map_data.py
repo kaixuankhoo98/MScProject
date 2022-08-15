@@ -53,7 +53,7 @@ def map_data(onto, data_to_map):
                                         PrimaryDiagnosis = [row['PRIMARY_DIAGNOSIS']], ## patient primary tumour icd10
                                         Sex = [row['SEX']]
                                         )
-            Instances.patients.append(thisPatient)
+            i.patients.append(thisPatient)
 
             # Create a new tumour instance
             thisTumour = onto.Tumour(TumourID = [row['MERGED_TUMOUR_ID']],
@@ -61,13 +61,13 @@ def map_data(onto, data_to_map):
                                         ICD10_Code = [row['SITE_ICD10_O2']], ## tumour icd10
                                         belongs_to_patient = [thisPatient]
                                         )
-            Instances.tumours.append(thisTumour)
+            i.tumours.append(thisTumour)
 
             # Create a new regimen instance
             thisRegimen = onto.Regimen(RegimenID = [row['MERGED_REGIMEN_ID']], 
                                         treats = [thisTumour]
                                         )
-            Instances.regimens.append(thisRegimen)
+            i.regimens.append(thisRegimen)
 
             # Create new drug instances in a for loop using names, then all drugs part of this regimen
             create_drug_instances(row['MAPPED_REGIMEN'], thisRegimen)
