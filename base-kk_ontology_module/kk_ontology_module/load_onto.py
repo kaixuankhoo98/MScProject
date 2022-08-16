@@ -2,7 +2,7 @@
 from owlready2 import *
 import pandas as pd
 
-TEST_ONTO = "extras/BreastCancerOntology.owl"
+TEST_ONTO = "extras/CancerOntology.owl"
 
 def load_onto(filename):
     return get_ontology(filename).load()

@@ -10,13 +10,19 @@ class Instances():
 i = Instances()
 
 def map_data(onto, data_to_map):
-    
+    ## --------------------- HELPER FUNCTIONS ---------------------
     def fec(instances, regimen):
+        '''
+        For handling the case where "FEC" is included in the regimen
+        '''
         instances.drugs.append(onto.Drug(has_drug_reference=[onto.Fluorouracil5REF], part_of_regimen=[regimen]))
         instances.drugs.append(onto.Drug(has_drug_reference=[onto.EpirubicinREF], part_of_regimen=[regimen]))
         instances.drugs.append(onto.Drug(has_drug_reference=[onto.CyclophosphamideREF], part_of_regimen=[regimen]))
 
     def create_drug_instances(string, regimen):
+        '''
+        Creating drug instances beased on the string (string describes the drugs)
+        '''
         if "capecitabine" in string.lower():
             i.drugs.append(onto.Drug(has_drug_reference=[onto.CapecitabineREF], part_of_regimen=[regimen]))
         if "carboplatin" in string.lower():
@@ -37,17 +43,39 @@ def map_data(onto, data_to_map):
             i.drugs.append(onto.Drug(has_drug_reference=[onto.TrastuzumabREF], part_of_regimen=[regimen]))
         if "FEC" in string:
             fec(i, regimen)
-        
-    def create_instances(data):
+    
+    def onto_behaviour_code(onto, code):
+        '''
+        Converts an integer (behaviour code) into the BehaviourCodeREF instance in ontology
+        '''
+        if code == 0:
+            return onto.BehaviourCode0REF
+        if code == 1:
+            return onto.BehaviourCode1REF
+        if code == 2:
+            return onto.BehaviourCode2REF
+        if code == 3:
+            return onto.BehaviourCode3REF
+        if code == 5:
+            return onto.BehaviourCode5REF
+        if code == 6:
+            return onto.BehaviourCode6REF
+        if code == 9:
+            return onto.BehaviourCode9REF
+        return 0 # error case
+    
+    ## --------------------- MAIN FUNCTION ---------------------
+    def create_instances(data, 
+                         patient_ID_col='LINKNUMBER', 
+                         tumour_id_col='MERGED_TUMOUR_ID', 
+                         tumour_behaviour_col='BEHAVIOUR_ICD10_O2'):
         for index, row in data.iterrows():
-            # print(row['MERGED_REGIMEN_ID'], row['MERGED_TUMOUR_ID'], row['MERGED_PATIENT_ID_x'], row['PRIMARY_DIAGNOSIS'], row['MAPPED_REGIMEN'])
-
             # Create a new patient instance
                 ## TODO: We might want to check if patient already in ontology
             today = datetime.date.today()
             yearBorn = datetime.date(today.year-row['AGE'],1,1).year
             vital = row['NEWVITALSTATUS']
-            thisPatient = onto.Patient(PatientID = [row['LINKNUMBER']], ## equivalent of NHS number 
+            thisPatient = onto.Patient(PatientID = [row[patient_ID_col]], ## equivalent of NHS number 
                                         DateOfBirth = [yearBorn],
                                         VitalStatus = [vital],
                                         PrimaryDiagnosis = [row['PRIMARY_DIAGNOSIS']], ## patient primary tumour icd10
@@ -56,9 +84,10 @@ def map_data(onto, data_to_map):
             i.patients.append(thisPatient)
 
             # Create a new tumour instance
-            thisTumour = onto.Tumour(TumourID = [row['MERGED_TUMOUR_ID']],
+            thisTumour = onto.Tumour(TumourID = [row[tumour_id_col]],
                                         DiagnosisDate = [row['DIAGNOSISDATEBEST']],
                                         ICD10_Code = [row['SITE_ICD10_O2']], ## tumour icd10
+                                        has_behaviour_code = [onto_behaviour_code(onto, row[tumour_behaviour_col])], # behaviour code
                                         belongs_to_patient = [thisPatient]
                                         )
             i.tumours.append(thisTumour)

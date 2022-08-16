@@ -65,7 +65,21 @@ def test5():
     o5.reason()
     print(has_morphology_code(test_data))
 
-test5()
+def test6():
+    o6 = CancerOntology()
+    o6.define_data(test_data)
+    o6.reason()
+    # print(o6.onto.search(subclass_of = o6.onto.Tumour))
+    print(to_pandas(test_data, o6.onto.Malignant_tumour_primary))
+
+def test6():
+    o7 = CancerOntology()
+    o7.define_data(test_data)
+    o7.reason()
+    # print(o6.onto.search(subclass_of = o6.onto.Tumour))
+    print(to_pandas(test_data, o7.onto.Patient))
+
+test6()
 
 # o1.reason()
 # print(o1.onto.E1.has_drug_reference)

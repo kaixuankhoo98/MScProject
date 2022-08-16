@@ -18,30 +18,32 @@ def to_pandas(df, onto_class, IDcolname="LINKNUMBER", returns='patient', onto=lo
     regimenIDs = []
     
     for instance in onto_class.instances():
-        if onto_class in onto.Regimen.subclasses():
+        ### TODO: Add functionality for DRUG instances
+
+        if (onto.search(subclass_of = onto.Regimen).count(onto_class)):
+        # if onto_class in onto.Regimen.subclasses():
             try:
                 patientIDs.append(instance.treats[0].belongs_to_patient[0].PatientID[0])
                 tumourIDs.append(instance.treats[0].TumourID[0])
                 regimenIDs.append(instance.RegimenID[0])
             except:
-                print("Error loading class")
-                return
-        elif onto_class in onto.Tumour.subclasses():
+                print("Empty instance")
+        elif (onto.search(subclass_of = onto.Tumour).count(onto_class)):
+        # elif onto_class in onto.Tumour.subclasses():
             try:
                 patientIDs.append(instance.belongs_to_patient[0].PatientID[0])
                 tumourIDs.append(instance.TumourID[0])
                 regimenIDs.append(instance.treated_by[0].RegimenID[0])
             except:
-                print("Error loading class")
-                return
-        elif onto_class in onto.Patient.subclasses():
+                print("Empty instance")
+        elif (onto.search(subclass_of = onto.Patient).count(onto_class)):
+        # elif onto_class in onto.Patient.subclasses():
             try:
                 patientIDs.append(instance.PatientID[0])
                 tumourIDs.append(instance.has_tumour[0].TumourID)
                 regimenIDs.append(instance.has_tumour[0].treated_by[0].RegimenID[0])
             except:
-                print("Error loading class")
-                return
+                print("Empty instance")
         else:
             print("Class is not supported. Currently supported subclasses are of type Regimen, Tumour, and Patient.")
             return
