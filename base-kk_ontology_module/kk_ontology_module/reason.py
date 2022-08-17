@@ -14,7 +14,7 @@ class CancerOntology:
     
     def reason(self):
         """
-        Reasons with pellet.
+        Reasons with HermiT.
         """
         with self.onto: sync_reasoner()
 
@@ -81,7 +81,7 @@ def test7():
     # print(o6.onto.search(subclass_of = o6.onto.Tumour))
     print(to_pandas(test_data, o7.onto.Tumour_C43_C44))
 
-test7()
+# test7()
 
 # o1.reason()
 # print(o1.onto.E1.has_drug_reference)
