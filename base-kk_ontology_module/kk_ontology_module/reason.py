@@ -67,19 +67,21 @@ def test5():
 
 def test6():
     o6 = CancerOntology()
-    o6.define_data(test_data)
+    o6data = load_data('extras/m2dummy_med.csv')
+    o6.define_data(o6data)
+    # o6.define_data
     o6.reason()
     # print(o6.onto.search(subclass_of = o6.onto.Tumour))
-    print(to_pandas(test_data, o6.onto.Malignant_tumour_primary))
+    print(to_pandas(o6data, o6.onto.PlatinumBasedRegimen, IDcolname='MERGED_REGIMEN_ID', returns='regimen'))
 
-def test6():
+def test7():
     o7 = CancerOntology()
     o7.define_data(test_data)
     o7.reason()
     # print(o6.onto.search(subclass_of = o6.onto.Tumour))
-    print(to_pandas(test_data, o7.onto.Patient))
+    print(to_pandas(test_data, o7.onto.Tumour_C43_C44))
 
-test6()
+test7()
 
 # o1.reason()
 # print(o1.onto.E1.has_drug_reference)
