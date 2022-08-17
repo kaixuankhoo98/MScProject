@@ -66,34 +66,44 @@ def map_data(onto, data_to_map):
     
     ## --------------------- MAIN FUNCTION ---------------------
     def create_instances(data, 
-                         patient_ID_col='LINKNUMBER', 
-                         tumour_id_col='MERGED_TUMOUR_ID', 
-                         tumour_behaviour_col='BEHAVIOUR_ICD10_O2'):
+                         patient_id_col='LINKNUMBER', 
+                         tumour_id_col='MERGED_TUMOUR_ID',
+                         tumour_icd10_col = 'SITE_ICD10_O2',
+                         tumour_behaviour_col='BEHAVIOUR_ICD10_O2',
+                         regimen_id_col = 'MERGED_REGIMEN_ID'):
+        '''
+        Mapping instances of data to individuals in the ontology.
+        Optional parameters are PatientID, TumourID, Tumour behaviour, RegimenID columns
+        '''
+
         for index, row in data.iterrows():
-            # Create a new patient instance
-                ## TODO: We might want to check if patient already in ontology
-            today = datetime.date.today()
-            yearBorn = datetime.date(today.year-row['AGE'],1,1).year
-            vital = row['NEWVITALSTATUS']
-            thisPatient = onto.Patient(PatientID = [row[patient_ID_col]], ## equivalent of NHS number 
-                                        DateOfBirth = [yearBorn],
-                                        VitalStatus = [vital],
-                                        PrimaryDiagnosis = [row['PRIMARY_DIAGNOSIS']], ## patient primary tumour icd10
-                                        Sex = [row['SEX']]
-                                        )
+            # Create a new patient instance, but checks if patient has been created before
+            patient_search = onto.search(PatientID = str(row[patient_id_col])+"*")
+            if not patient_search:
+                today = datetime.date.today()
+                yearBorn = datetime.date(today.year-row['AGE'],1,1).year
+                vital = row['NEWVITALSTATUS']
+                thisPatient = onto.Patient(PatientID = [row[patient_id_col]], ## equivalent of NHS number 
+                                            DateOfBirth = [yearBorn],
+                                            VitalStatus = [vital],
+                                            PrimaryDiagnosis = [row['PRIMARY_DIAGNOSIS']], ## patient primary tumour icd10
+                                            Sex = [row['SEX']]
+                                            )
+            else:
+                thisPatient = patient_search[0]
             i.patients.append(thisPatient)
 
             # Create a new tumour instance
             thisTumour = onto.Tumour(TumourID = [row[tumour_id_col]],
                                         DiagnosisDate = [row['DIAGNOSISDATEBEST']],
-                                        ICD10_Code = [row['SITE_ICD10_O2']], ## tumour icd10
+                                        ICD10_Code = [row[tumour_icd10_col]], ## tumour icd10
                                         has_behaviour_code = [onto_behaviour_code(onto, row[tumour_behaviour_col])], # behaviour code
                                         belongs_to_patient = [thisPatient]
                                         )
             i.tumours.append(thisTumour)
 
             # Create a new regimen instance
-            thisRegimen = onto.Regimen(RegimenID = [row['MERGED_REGIMEN_ID']], 
+            thisRegimen = onto.Regimen(RegimenID = [row[regimen_id_col]], 
                                         treats = [thisTumour]
                                         )
             i.regimens.append(thisRegimen)
@@ -101,4 +111,5 @@ def map_data(onto, data_to_map):
             # Create new drug instances in a for loop using names, then all drugs part of this regimen
             create_drug_instances(row['MAPPED_REGIMEN'], thisRegimen)
     
+    # ----------- CREATING INSTANCES FUNCTION CALLED -----------------
     create_instances(data_to_map)
