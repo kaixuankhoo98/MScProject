@@ -15,6 +15,10 @@ The table structure for simulacrum is shown here. This jupyter notebook was crea
 ## TestOwlPython (Jupyter Notebook)
 This is the playground for me to mess around with OwlReady2. Here you will find the functions I created to create instances. Currently, with the version available here, I am able to load a csv file into pandas, then create individual patients, tumours, regimens, and drug instances and connect them. The next step is to refine the functions, especially the drug-instance creating function. 
 
+## Base-kk_ontology_module
+This is where the python package with the ontology-based tooling exists. This package uses owlready2 as a base, but includes the CancerOntology object, which allows the user to use an existing cancer ontology as a logic base to enhance their data analysis.
+For a deeper understanding of the package, please enter the base-kk_ontology_folder and read the documentation.
+
 ## Next steps:
 - Create a GUI, either in python or as a plugin for Protege, for cancer researchers to be able to query their ABox
 - Map the ontology to existing ontologies such as SNOMED-CT
