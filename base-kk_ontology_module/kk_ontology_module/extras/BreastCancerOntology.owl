@@ -1,0 +1,1063 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#"
+     xml:base="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:BreastCancerOntology="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology">
+        <python_module>my_package.my_module</python_module>
+        <rdfs:comment>An ontology modeling the patients, tumour, and treatment of breast cancer patients.
+
+In this Ontology, the Drug_reference class contains reference individuals for the drugs modeled in this ontology.</rdfs:comment>
+        <rdfs:label>Breast Cancer Treatment Ontology</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#python_module -->
+
+    <owl:AnnotationProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#python_module"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#administered_via -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#administered_via">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Method_of_administration"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#belongs_to_patient -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#belongs_to_patient">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_tumour"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#part_of_regimen"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug_reference"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_tumour -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_tumour">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#part_of_regimen -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#part_of_regimen">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#treated_by -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#treated_by">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#treats"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#treats -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#treats">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DateOfBirth -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DateOfBirth">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data"/>
+        <rdfs:comment>Patient date of birth</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DiagnosisDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DiagnosisDate">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour_data"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Dose -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Dose">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="en">Drug dose in mg</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug_data -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug_data">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#ICD10_Code -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#ICD10_Code">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IsAlive -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IsAlive">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PatientID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PatientID">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>Unique patient ID number</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PrimaryDiagnosis -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PrimaryDiagnosis">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>IDC10 Code for the primary diagnosis</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#RegimenID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#RegimenID">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen_data -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen_data">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Sex -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Sex">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>One of the following options:
+0 = Not known
+1 = Male
+2 = Female
+9 = Not specified
+4000 = Indeterminate</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TumourID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TumourID">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour_data -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour_data">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#VitalStatus -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#VitalStatus">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient_data"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Can be any of the following:
+A = Alive
+D = Dead
+X = Exit Posting</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AlkylatingAgent -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AlkylatingAgent">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug_reference"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AlkylatingAgentDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AlkylatingAgentDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AlkylatingAgent"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Anthracycline -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Anthracycline">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug_reference"/>
+        <rdfs:comment xml:lang="en">Anthracyclines act by intercalating DNA strands, damaging the DNA</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AnthracyclineDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AnthracyclineDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Anthracycline"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetabolite -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetabolite">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug_reference"/>
+        <rdfs:comment xml:lang="en">Anti-metabolites are cytotoxic drugs that mimic a molecule that cells use to grow, killing cells in the process.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetaboliteDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetaboliteDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetabolite"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetaboliteRegimen -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetaboliteRegimen">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetaboliteDrug"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Capecitabine -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Capecitabine">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetabolite"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CapecitabineDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CapecitabineDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Capecitabine"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetaboliteDrug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Carboplatin -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Carboplatin">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PlatinumBased"/>
+        <rdfs:comment xml:lang="en">Platinum-based drugs typically can crosslink with urine bases on DNA, preventing DNA repair and damage, resulting in apoptosis of cancer cells.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CarboplatinDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CarboplatinDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Carboplatin"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PlatinumBasedDrug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Cyclophosphamide -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Cyclophosphamide">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#NitrogenMustardBased"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CyclophosphamideDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CyclophosphamideDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Cyclophosphamide"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#NitrogenMustardDrug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Docetaxel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Docetaxel">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Taxane"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelContainingRegimen -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelContainingRegimen">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelDrug"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TaxaneContainingRegimen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Docetaxel"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TaxaneDrug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug_reference"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">Drug  contains the drug with the dose, and uses reference individuals of the Drug_reference class.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug_reference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug_reference">
+        <rdfs:comment xml:lang="en">Drug reference contains reference individuals, and are a chemical compound used for therapeutic purposes.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Epirubicin -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Epirubicin">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Anthracycline"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#EpirubicinDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#EpirubicinDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Epirubicin"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AnthracyclineDrug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FEC -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FEC">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CyclophosphamideDrug"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#EpirubicinDrug"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FUDrug"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FU -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FU">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetabolite"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FUDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FUDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FU"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AntiMetaboliteDrug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2Targeted -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2Targeted">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug_reference"/>
+        <rdfs:comment xml:lang="en">Drugs used for HER2-positive breast cancer patients, preventing HER2-mediated signalling</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2TargetedDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2TargetedDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2Targeted"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2TargetedRegimen -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2TargetedRegimen">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2TargetedDrug"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Infusion -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Infusion">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Method_of_administration"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Injection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Injection -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Injection">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Method_of_administration"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intramuscular -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intramuscular">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Injection"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intravenous"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Subcutaneous"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intravenous -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intravenous">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Injection"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Subcutaneous"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Method_of_administration -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Method_of_administration"/>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#NitrogenMustardBased -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#NitrogenMustardBased">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AlkylatingAgent"/>
+        <rdfs:comment xml:lang="en">Nitrogen mustard type drugs are alkylating agents that typically cross-link strands of DNA and inhibit protein synthesis.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#NitrogenMustardDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#NitrogenMustardDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#NitrogenMustardBased"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AlkylatingAgentDrug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Paclitaxel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Paclitaxel">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Taxane"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PaclitaxelDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PaclitaxelDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Paclitaxel"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TaxaneDrug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_tumour"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Pertuzumab -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Pertuzumab">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2Targeted"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PertuzumabDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PertuzumabDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Pertuzumab"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2TargetedDrug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PlatinumBased -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PlatinumBased">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AlkylatingAgent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PlatinumBasedDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PlatinumBasedDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PlatinumBased"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#AlkylatingAgentDrug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PlatinumBasedRegimen -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PlatinumBasedRegimen">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PlatinumBasedDrug"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Subcutaneous -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Subcutaneous">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Injection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Taxane -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Taxane">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug_reference"/>
+        <rdfs:comment xml:lang="en">Taxanes are antimicrotubule agents, inhibiting mitotic behaviour.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TaxaneContainingRegimen -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TaxaneContainingRegimen">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TaxaneDrug"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TaxaneDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TaxaneDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Taxane"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Trastuzumab -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Trastuzumab">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2Targeted"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TrastuzumabBasedRegimen -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TrastuzumabBasedRegimen">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#contains"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TrastuzumabDrug"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2TargetedRegimen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TrastuzumabDrug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TrastuzumabDrug">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#has_drug_reference"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Trastuzumab"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#HER2TargetedDrug"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#belongs_to_patient"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CP1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CP1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+        <has_drug_reference rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CyclophosphamideREF"/>
+        <Dose rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</Dose>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CapecitabineREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CapecitabineREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Capecitabine"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CarboplatinREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CarboplatinREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Carboplatin"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CyclophosphamideREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CyclophosphamideREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Cyclophosphamide"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Docetaxel"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#E1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#E1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+        <has_drug_reference rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#EpirubicinREF"/>
+        <Dose rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">100</Dose>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#EpirubicinREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#EpirubicinREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Epirubicin"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#F1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#F1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Drug"/>
+        <has_drug_reference rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Fluorouracil5REF"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Fluorouracil5REF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Fluorouracil5REF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#FU"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#InfusionREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#InfusionREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Infusion"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IntramuscularREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IntramuscularREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intramuscular"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IntravenousREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#IntravenousREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Intravenous"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PaclitaxelREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PaclitaxelREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Paclitaxel"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Patient"/>
+        <has_tumour rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour1"/>
+        <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10262332</PatientID>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PertuzumabREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#PertuzumabREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Pertuzumab"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Regimen"/>
+        <contains rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CP1"/>
+        <contains rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#E1"/>
+        <contains rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#F1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#SubcutaneousREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#SubcutaneousREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Subcutaneous"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TrastuzumabREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#TrastuzumabREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Trastuzumab"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#Tumour"/>
+        <ICD10_Code>C509</ICD10_Code>
+        <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003620</TumourID>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
