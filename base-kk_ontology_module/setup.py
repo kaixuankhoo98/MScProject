@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.1' 
-DESCRIPTION = 'Cancer Ontology'
+VERSION = '1.0.0' 
+DESCRIPTION = 'Ontology-based tool for cancer data analysis'
 LONG_DESCRIPTION = 'A packaged set of functions for ontology-based reasoning of cancer patients'
 
 # Setting up
@@ -15,7 +15,7 @@ setup(
         long_description=LONG_DESCRIPTION,
         packages=find_packages(),
         package_data={'kk_ontology_module': ['extras/*']},
-        install_requires=["owlready2", "pandas"], # add any additional packages that 
+        install_requires=["cython", "wheel", "owlready2", "pandas"], # add any additional packages that 
         # needs to be installed along with your package. Eg: 'caer'
         
         keywords=['python', 'ontology', 'cancer'],

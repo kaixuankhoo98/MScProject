@@ -2,30 +2,30 @@ from owlready2 import *
 from kk_ontology_module.load_data import load_data, TEST_DATA
 from kk_ontology_module.load_onto import load_onto, TEST_ONTO
 from kk_ontology_module.map_data import map_data
-from kk_ontology_module.datamanip import to_pandas, has_icd10_code, has_morphology_code
 
-test_onto = load_onto() #default ontology
-test_data = load_data()
+test_onto = load_onto() # default ontology
+test_data = load_data() # default data
 
 ## Defining class cancer ontology
 class CancerOntology:
     def __init__(self, onto=test_onto):
         self.onto = onto
+        self.default_world = World()
+        self.world = default_world
     
     def reason(self):
         """
-        Reasons with HermiT.
+        Reasons with HermiT. From the Owlready2 Package.
         """
-        with self.onto: sync_reasoner()
+        with self.onto: sync_reasoner(self.world)
 
-    def reload(self, onto):
+    def reload(self):
         """
         Function to reload the ontology
-        TODO: This doesn't work...
+        TODO: Unfortunately this doesn't work...
         """
-        del self.onto
         print("Previous ontology deleted.")
-        self.onto = onto
+        self.world = default_world
         print("New ontology loaded.")
     
     def define_data(self, data):
@@ -81,7 +81,7 @@ class CancerOntology:
 #     # print(o6.onto.search(subclass_of = o6.onto.Tumour))
 #     print(to_pandas(test_data, o7.onto.Tumour_C43_C44))
 
-# test7()
+# test1()
 
 # o1.reason()
 # print(o1.onto.E1.has_drug_reference)

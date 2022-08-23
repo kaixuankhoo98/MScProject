@@ -44,8 +44,15 @@ def to_pandas(df, onto_class, IDcolname="LINKNUMBER", returns='patient', onto=lo
                 regimenIDs.append(instance.has_tumour[0].treated_by[0].RegimenID[0])
             except:
                 print("Empty instance")
+        elif (onto.search(subclass_of = onto.Drug).count(onto_class)):
+            try:
+                patientIDs.append(instance.part_of_regimen[0].treats[0].belongs_to_patient[0].PatientID[0])
+                tumourIDs.append(instance.part_of_regimen[0].treats[0].TumourID)
+                regimenIDs.append(instance.part_of_regimen[0].RegimenID[0])
+            except:
+                print("Empty instance")
         else:
-            print("Class is not supported. Currently supported subclasses are of type Regimen, Tumour, and Patient.")
+            print("Class is not supported. Currently supported subclasses are of type Drug, Regimen, Tumour, and Patient.")
             return
 
     # print(patientIDs)
