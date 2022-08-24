@@ -64,6 +64,7 @@ class CancerOntology:
         self.vital_status = 'VITALSTATUS'
         self.diagnosis_date_col = 'DIAGNOSISYEAR'
         self.regimen_string_col = 'BENCHMARK_GROUP'
+        return
 
 
 # def test1():
