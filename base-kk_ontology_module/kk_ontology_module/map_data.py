@@ -1,5 +1,6 @@
 from owlready2 import *
-import pandas as pd
+from contextlib import suppress # for no column name
+
 
 class Instances():
     patients = []
@@ -182,7 +183,8 @@ def map_data(onto, data_to_map,
     def create_instances(data):
         '''
         Mapping instances of data to individuals in the ontology.
-        Optional parameters are PatientID, TumourID, Tumour behaviour, RegimenID columns
+        Mandatory parameters are PatientID, TumourID, RegimenID, RegimenStringColumn, VitalStatus, PrimaryDiagnosis
+        Optional parameters are Age, Sex, TumourBehaviourCode, TumourICD10Column
         '''
 
         for index, row in data.iterrows():
@@ -190,13 +192,12 @@ def map_data(onto, data_to_map,
             patient_search = onto.search(PatientID = str(row[patient_id_col])+"*")
             if not patient_search:
                 today = datetime.date.today()
-                yearBorn = datetime.date(today.year-row[patient_age],1,1).year
-                vital = row[vital_status]
+                yearBorn = datetime.date(today.year-row[patient_age],1,1).year if patient_age in data.columns else 0
                 thisPatient = onto.Patient(PatientID = [row[patient_id_col]], ## equivalent of NHS number 
                                             DateOfBirth = [yearBorn],
-                                            VitalStatus = [vital],
+                                            VitalStatus = [row[vital_status]],
                                             PrimaryDiagnosis = [row[patient_primary_diagnosis]], ## patient primary tumour icd10
-                                            Sex = [row[sex_col]]
+                                            Sex = [row[sex_col]] if sex_col in data.columns else [0]
                                             )
             else:
                 thisPatient = patient_search[0]
@@ -207,8 +208,8 @@ def map_data(onto, data_to_map,
             if not tumour_search:
                 thisTumour = onto.Tumour(TumourID = [row[tumour_id_col]],
                                             DiagnosisDate = [row[diagnosis_date_col]],
-                                            ICD10_Code = [row[tumour_icd10_col]], ## tumour icd10
-                                            has_behaviour_code = [onto_behaviour_code(onto, row[tumour_behaviour_col])], # behaviour code
+                                            ICD10_Code = [row[tumour_icd10_col]] if tumour_icd10_col in data.columns else 0, ## tumour icd10
+                                            has_behaviour_code = [onto_behaviour_code(onto, row[tumour_behaviour_col])] if tumour_behaviour_col in data.columns else 0, # behaviour code
                                             belongs_to_patient = [thisPatient],
                                             has_tumour_reference = [tumour_icd10_code(onto, row[tumour_icd10_col])]
                                             )
@@ -226,4 +227,5 @@ def map_data(onto, data_to_map,
             create_drug_instances(row[regimen_string_col], thisRegimen)
     
     # ----------- CREATING INSTANCES FUNCTION CALLED -----------------
-    create_instances(data_to_map)
+    with suppress(KeyError):
+        create_instances(data_to_map)

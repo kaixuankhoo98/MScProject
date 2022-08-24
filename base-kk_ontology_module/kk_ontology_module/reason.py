@@ -12,7 +12,20 @@ class CancerOntology:
         self.onto = onto
         self.default_world = World()
         self.world = default_world
-    
+
+        # setting the default column names: these should be able to be edited
+        self.patient_id_col = 'LINKNUMBER'
+        self.tumour_id_col = 'MERGED_TUMOUR_ID'
+        self.tumour_icd10_col = 'SITE_ICD10_O2'
+        self.tumour_behaviour_col = 'BEHAVIOUR_ICD10_O2'
+        self.regimen_id_col = 'MERGED_REGIMEN_ID'
+        self.patient_age = 'AGE'
+        self.vital_status = 'NEWVITALSTATUS'
+        self.patient_primary_diagnosis = 'PRIMARY_DIAGNOSIS'
+        self.sex_col = 'SEX'
+        self.diagnosis_date_col = 'DIAGNOSISDATEBEST'
+        self.regimen_string_col = 'MAPPED_REGIMEN'
+
     def reason(self):
         """
         Reasons with HermiT. From the Owlready2 Package.
@@ -29,8 +42,29 @@ class CancerOntology:
         print("New ontology loaded.")
     
     def define_data(self, data):
+        
         self.data = data
-        map_data(self.onto, data)
+        map_data(self.onto, data,
+                 patient_id_col = self.patient_id_col, 
+                 tumour_id_col = self.tumour_id_col,
+                 tumour_icd10_col = self.tumour_icd10_col,
+                 tumour_behaviour_col = self.tumour_behaviour_col,
+                 regimen_id_col = self.regimen_id_col,
+                 patient_age = self.patient_age,
+                 vital_status = self.vital_status,
+                 patient_primary_diagnosis = self.patient_primary_diagnosis,
+                 sex_col = self.sex_col,
+                 diagnosis_date_col = self.diagnosis_date_col,
+                 regimen_string_col = self.regimen_string_col)
+    
+    def set_gliocova_column_names(self):
+        self.patient_id_col = 'PSEUDO_PATIENTID'
+        self.tumour_id_col = 'PSEUDO_TUMOURID'
+        self.regimen_id_col = 'REGIMEN_NUMBER'
+        self.vital_status = 'VITALSTATUS'
+        self.diagnosis_date_col = 'DIAGNOSISYEAR'
+        self.regimen_string_col = 'BENCHMARK_GROUP'
+
 
 # def test1():
 #     o1 = CancerOntology()
