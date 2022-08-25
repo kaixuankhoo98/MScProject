@@ -1,0 +1,1521 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology"
+         xmlns="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#">
+
+<owl:Ontology rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology">
+  <python_module>my_package.my_module</python_module>
+  <rdfs:comment>An ontology modeling the patients, tumour, and treatment of all cancer patients.
+
+In this Ontology, the Drug_reference class contains reference individuals for the drugs modeled in this ontology.</rdfs:comment>
+  <rdfs:label>Full Cancer Treatment Ontology</rdfs:label>
+</owl:Ontology>
+
+<owl:ObjectProperty rdf:about="#administered_via">
+  <rdfs:domain rdf:resource="#Regimen"/>
+  <rdfs:range rdf:resource="#Method_of_administration"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#belongs_to_patient">
+  <owl:inverseOf rdf:resource="#has_tumour"/>
+  <rdfs:domain rdf:resource="#Tumour"/>
+  <rdfs:range rdf:resource="#Patient"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_tumour">
+  <rdfs:domain rdf:resource="#Patient"/>
+  <rdfs:range rdf:resource="#Tumour"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#contains">
+  <owl:inverseOf rdf:resource="#part_of_regimen"/>
+  <rdfs:domain rdf:resource="#Regimen"/>
+  <rdfs:range rdf:resource="#Drug"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#part_of_regimen">
+  <rdfs:domain rdf:resource="#Drug"/>
+  <rdfs:range rdf:resource="#Regimen"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_behaviour_code">
+  <rdfs:domain rdf:resource="#Tumour"/>
+  <rdfs:range rdf:resource="#Tumour_behaviour_reference"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_drug_reference">
+  <rdfs:domain rdf:resource="#Drug"/>
+  <rdfs:range rdf:resource="#Drug_reference"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_tumour_reference">
+  <rdfs:domain rdf:resource="#Tumour"/>
+  <rdfs:range rdf:resource="#Tumour_ICD10_reference"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#treated_by">
+  <owl:inverseOf rdf:resource="#treats"/>
+  <rdfs:domain rdf:resource="#Tumour"/>
+  <rdfs:range rdf:resource="#Regimen"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#treats">
+  <rdfs:domain rdf:resource="#Regimen"/>
+  <rdfs:range rdf:resource="#Tumour"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_vital_reference">
+  <rdfs:domain rdf:resource="#Patient"/>
+  <rdfs:range rdf:resource="#Vital_reference"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#Behaviour_Code">
+  <rdfs:subPropertyOf rdf:resource="#Tumour_data"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#Tumour_data">
+  <rdfs:domain rdf:resource="#Tumour"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#DateOfBirth">
+  <rdfs:subPropertyOf rdf:resource="#Patient_data"/>
+  <rdfs:comment>Patient date of birth</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#Patient_data">
+  <rdfs:domain rdf:resource="#Patient"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#DiagnosisDate">
+  <rdfs:subPropertyOf rdf:resource="#Tumour_data"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#Dose">
+  <rdfs:subPropertyOf rdf:resource="#Drug_data"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  <rdfs:comment xml:lang="en">Drug dose in mg</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#Drug_data">
+  <rdfs:domain rdf:resource="#Drug"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#ICD10_Code">
+  <rdfs:subPropertyOf rdf:resource="#Tumour_data"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#ICD_O_3_Code">
+  <rdfs:subPropertyOf rdf:resource="#Tumour_data"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#IsAlive">
+  <rdfs:subPropertyOf rdf:resource="#Patient_data"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#PatientID">
+  <rdfs:subPropertyOf rdf:resource="#Patient_data"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  <rdfs:comment>Unique patient ID number</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#PrimaryDiagnosis">
+  <rdfs:subPropertyOf rdf:resource="#Patient_data"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:comment>IDC10 Code for the primary diagnosis</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#RegimenID">
+  <rdfs:subPropertyOf rdf:resource="#Regimen_data"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#Regimen_data">
+  <rdfs:domain rdf:resource="#Regimen"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#Sex">
+  <rdfs:subPropertyOf rdf:resource="#Patient_data"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  <rdfs:comment>One of the following options:
+0 = Not known
+1 = Male
+2 = Female
+9 = Not specified
+4000 = Indeterminate</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#TumourID">
+  <rdfs:subPropertyOf rdf:resource="#Tumour_data"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#VitalStatus">
+  <rdfs:subPropertyOf rdf:resource="#Patient_data"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:comment>Can be any of the following:
+A = Alive
+D = Dead
+X = Exit Posting</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:AnnotationProperty rdf:about="#python_module"/>
+
+<owl:Class rdf:about="#Regimen">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Drug"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#Method_of_administration"/>
+
+<owl:Class rdf:about="#Tumour">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#belongs_to_patient"/>
+      <owl:onClass rdf:resource="#Patient"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_behaviour_code"/>
+      <owl:onClass rdf:resource="#Tumour_behaviour_reference"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#Tumour_ICD10_reference"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#Patient">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour"/>
+      <owl:onClass rdf:resource="#Tumour"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#Drug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Drug_reference"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:comment xml:lang="en">Drug  contains the drug with the dose, and uses reference individuals of the Drug_reference class.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_behaviour_reference"/>
+
+<owl:Class rdf:about="#Drug_reference">
+  <rdfs:comment xml:lang="en">Drug reference contains reference individuals, and are a chemical compound used for therapeutic purposes.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_ICD10_reference">
+  <rdfs:comment xml:lang="en">Tumour references are the ICD-10 codes referring to the primary site of the tumour</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#AlkylatingAgent">
+  <rdfs:subClassOf rdf:resource="#Drug_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AlkylatingAgentDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#AlkylatingAgent"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Drug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Anthracycline">
+  <rdfs:subClassOf rdf:resource="#Drug_reference"/>
+  <rdfs:comment xml:lang="en">Anthracyclines act by intercalating DNA strands, damaging the DNA</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#AnthracyclineDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Anthracycline"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Drug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AntiMetabolite">
+  <rdfs:subClassOf rdf:resource="#Drug_reference"/>
+  <rdfs:comment xml:lang="en">Anti-metabolites are cytotoxic drugs that mimic a molecule that cells use to grow, killing cells in the process.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#AntiMetaboliteDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#AntiMetabolite"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Drug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AntiMetaboliteRegimen">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AntiMetaboliteDrug"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Regimen"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AntimicrotubuleAgent">
+  <rdfs:subClassOf rdf:resource="#Drug_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AntimicrotubuleAgentDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#AntimicrotubuleAgent"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Drug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BehaviourCode0">
+  <rdfs:subClassOf rdf:resource="#Tumour_behaviour_reference"/>
+  <rdfs:comment>Benign</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#BehaviourCode1">
+  <rdfs:subClassOf rdf:resource="#Tumour_behaviour_reference"/>
+  <rdfs:comment>Unknown (benign or malignant)</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#BehaviourCode2">
+  <rdfs:subClassOf rdf:resource="#Tumour_behaviour_reference"/>
+  <rdfs:comment>Uncertain</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#BehaviourCode3">
+  <rdfs:subClassOf rdf:resource="#Tumour_behaviour_reference"/>
+  <rdfs:comment>Malignant (usually primatry site)</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#BehaviourCode5">
+  <rdfs:subClassOf rdf:resource="#Tumour_behaviour_reference"/>
+  <rdfs:comment>Micro-invasive</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#BehaviourCode6">
+  <rdfs:subClassOf rdf:resource="#Tumour_behaviour_reference"/>
+  <rdfs:comment>Malignant, secondary site (metastatic)</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#BehaviourCode9">
+  <rdfs:subClassOf rdf:resource="#Tumour_behaviour_reference"/>
+  <rdfs:comment>Malignant, unsure if primary or metastatic</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Benign_tumour">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_behaviour_code"/>
+      <owl:onClass rdf:resource="#BehaviourCode0"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Brain_Cancer_Patient">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour"/>
+      <owl:someValuesFrom rdf:resource="#Tumour_Brain"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Patient"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_Brain">
+  <owl:equivalentClass rdf:resource="#Tumour_C71"/>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Breast_Cancer_Patient">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour"/>
+      <owl:someValuesFrom rdf:resource="#Tumour_Breast"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Patient"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_Breast">
+  <owl:equivalentClass rdf:resource="#Tumour_C50_C50"/>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C00_C14">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C15_C26">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C30_C39">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C40_C41">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C43_C44">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C45_C49">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C50_C50">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C51_C58">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C60_C63">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C64_C68">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C69_C72">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C71">
+  <rdfs:subClassOf rdf:resource="#C69_C72"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C73_C75">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C76_C80">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C7A_C7A">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C7B_C7B">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#C81_C96">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Capecitabine">
+  <rdfs:subClassOf rdf:resource="#AntiMetabolite"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CapecitabineDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Capecitabine"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#AntiMetaboliteDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Carboplatin">
+  <rdfs:subClassOf rdf:resource="#PlatinumBased"/>
+  <rdfs:comment xml:lang="en">Platinum-based drugs typically can crosslink with urine bases on DNA, preventing DNA repair and damage, resulting in apoptosis of cancer cells.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#PlatinumBased">
+  <rdfs:subClassOf rdf:resource="#AlkylatingAgent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CarboplatinDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Carboplatin"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#PlatinumBasedDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PlatinumBasedDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#PlatinumBased"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#AlkylatingAgentDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Cisplatin">
+  <rdfs:subClassOf rdf:resource="#PlatinumBased"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CisplatinDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Cisplatin"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#PlatinumBasedDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Cyclophosphamide">
+  <rdfs:subClassOf rdf:resource="#NitrogenMustardBased"/>
+</owl:Class>
+
+<owl:Class rdf:about="#NitrogenMustardBased">
+  <rdfs:subClassOf rdf:resource="#AlkylatingAgent"/>
+  <rdfs:comment xml:lang="en">Nitrogen mustard type drugs are alkylating agents that typically cross-link strands of DNA and inhibit protein synthesis.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#CyclophosphamideDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Cyclophosphamide"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#NitrogenMustardDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#NitrogenMustardDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#NitrogenMustardBased"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#AlkylatingAgentDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Cytarabine">
+  <rdfs:subClassOf rdf:resource="#AntiMetabolite"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CytarabineDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Cytarabine"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#AntiMetaboliteDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#D00_D09">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#D10_D36">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#D37_D48">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#D3A_D3A">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#D49_D49">
+  <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Docetaxel">
+  <rdfs:subClassOf rdf:resource="#Taxane"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Taxane">
+  <rdfs:subClassOf rdf:resource="#AntimicrotubuleAgent"/>
+  <rdfs:comment xml:lang="en">Taxanes are antimicrotubule agents, inhibiting mitotic behaviour.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#DocetaxelContainingRegimen">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#DocetaxelDrug"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#TaxaneContainingRegimen"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DocetaxelDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Docetaxel"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#TaxaneDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TaxaneContainingRegimen">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#TaxaneDrug"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Regimen"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TaxaneDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Taxane"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#AntimicrotubuleAgentDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Doxorubicin">
+  <rdfs:subClassOf rdf:resource="#Anthracycline"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DoxorubicinDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Doxorubicin"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#AnthracyclineDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Epirubicin">
+  <rdfs:subClassOf rdf:resource="#Anthracycline"/>
+</owl:Class>
+
+<owl:Class rdf:about="#EpirubicinDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Epirubicin"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#AnthracyclineDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FEC">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#contains"/>
+          <owl:someValuesFrom rdf:resource="#CyclophosphamideDrug"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#contains"/>
+          <owl:someValuesFrom rdf:resource="#EpirubicinDrug"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#contains"/>
+          <owl:someValuesFrom rdf:resource="#FUDrug"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Regimen"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FUDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#FU"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#AntiMetaboliteDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FU">
+  <rdfs:subClassOf rdf:resource="#AntiMetabolite"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Gemcitabine">
+  <rdfs:subClassOf rdf:resource="#AntiMetabolite"/>
+</owl:Class>
+
+<owl:Class rdf:about="#GemcitabineDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Gemcitabine"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#AntiMetaboliteDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HER2Targeted">
+  <rdfs:subClassOf rdf:resource="#MonoclonalAntibody"/>
+  <rdfs:comment xml:lang="en">Drugs used for HER2-positive breast cancer patients, preventing HER2-mediated signalling</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#MonoclonalAntibody">
+  <rdfs:subClassOf rdf:resource="#Drug_reference"/>
+  <rdfs:comment>Monoclonal antibody drugs - typically synthesized by cloning a specialized white blood cell capable of antibody synthesis</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#HER2TargetedDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#HER2Targeted"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#MonoclonalAntibodyDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#MonoclonalAntibodyDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#MonoclonalAntibody"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Drug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HER2TargetedRegimen">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#HER2TargetedDrug"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Regimen"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Hydroxycarbamide">
+  <rdfs:subClassOf rdf:resource="#AntiMetabolite"/>
+  <rdfs:comment>aka Hydroxyurea</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#HydroxycarbamideDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Hydroxycarbamide"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#AntiMetaboliteDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Infusion">
+  <rdfs:subClassOf rdf:resource="#Method_of_administration"/>
+  <owl:disjointWith rdf:resource="#Injection"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Injection">
+  <rdfs:subClassOf rdf:resource="#Method_of_administration"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Intramuscular">
+  <rdfs:subClassOf rdf:resource="#Injection"/>
+  <owl:disjointWith rdf:resource="#Intravenous"/>
+  <owl:disjointWith rdf:resource="#Subcutaneous"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Intravenous">
+  <rdfs:subClassOf rdf:resource="#Injection"/>
+  <owl:disjointWith rdf:resource="#Subcutaneous"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Subcutaneous">
+  <rdfs:subClassOf rdf:resource="#Injection"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Malignant_tumour">
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Malignant_tumour_primary">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_behaviour_code"/>
+      <owl:onClass rdf:resource="#BehaviourCode3"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Malignant_tumour"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Malignant_tumour_secondary">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_behaviour_code"/>
+      <owl:onClass rdf:resource="#BehaviourCode6"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Malignant_tumour"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Malignant_tumour_unknown">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_behaviour_code"/>
+      <owl:onClass rdf:resource="#BehaviourCode9"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Malignant_tumour"/>
+</owl:Class>
+
+<owl:Class rdf:about="#MultiDrugRegimen">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:onClass rdf:resource="#Drug"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Regimen"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Oxaliplatin">
+  <rdfs:subClassOf rdf:resource="#PlatinumBased"/>
+</owl:Class>
+
+<owl:Class rdf:about="#OxaliplatinDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Oxaliplatin"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#PlatinumBasedDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Paclitaxel">
+  <rdfs:subClassOf rdf:resource="#Taxane"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PaclitaxelDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Paclitaxel"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#TaxaneDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Pertuzumab">
+  <rdfs:subClassOf rdf:resource="#HER2Targeted"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PertuzumabDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Pertuzumab"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#HER2TargetedDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PlatinumBasedRegimen">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#PlatinumBasedDrug"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Regimen"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Rituximab">
+  <rdfs:subClassOf rdf:resource="#MonoclonalAntibody"/>
+</owl:Class>
+
+<owl:Class rdf:about="#RituximabDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Rituximab"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#MonoclonalAntibodyDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TAC">
+  <rdfs:subClassOf rdf:resource="#Regimen"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TCH">
+  <rdfs:subClassOf rdf:resource="#Regimen"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TrastuzumabDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Trastuzumab"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#HER2TargetedDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Temozolomide">
+  <rdfs:subClassOf rdf:resource="#AlkylatingAgent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TemozolomideDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Temozolomide"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#AlkylatingAgentDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Trastuzumab">
+  <rdfs:subClassOf rdf:resource="#HER2Targeted"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TrastuzumabBasedRegimen">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#TrastuzumabDrug"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#HER2TargetedRegimen"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C71">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#Tumour_C71"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour_C69_C72"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C50_C50">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C50_C50"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of breast</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C00_C14">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C00_C14"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of lip, oral cavity, and pharynx</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C15_C26">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C15_C26"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of digestive organs</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C30_C39">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C30_C39"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of respiratory and intrathoracic organs</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C40_C41">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C40_C41"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of bone and articular cartilage</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C43_C44">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C43_C44"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Melanoma and other malignant neoplasms of skin</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C45_C49">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C45_C49"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of mesothelial and soft tissue</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C51_C58">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C51_C58"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of female genital organs</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C60_C63">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C60_C63"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of male genital organs</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C64_C68">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C64_C68"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of urinary tract</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C69_C72">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C69_C72"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of eye, brain, and other parts of central nervous system</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C73_C75">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C73_C75"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of thyroid and other endocrine glands</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C76_C80">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C76_C80"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of ill-defined, other secondary and unspecified sites</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C7A_C7A">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C7A_C7A"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neuroendocrine tumours</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C7B_C7B">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C7B_C7B"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Secondary neuroendocrine tumours</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_C81_C96">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#C81_C96"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Malignant neoplasms of lymphoid, hematopoietic and related tissue</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_D00_D09">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#D00_D09"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>In situ neoplasms</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_D10_D36">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#D10_D36"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Benign neoplasms, except benign neuroendocrine tumours</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_D37_D48">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#D37_D48"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Neoplasms of uncertain behaviour, polycythemia vera and myelodysplastic syndromes</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_D3A_D3A">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#D3A_D3A"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Benign neuroendocrine tumours</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Tumour_D49_D49">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_tumour_reference"/>
+      <owl:onClass rdf:resource="#D49_D49"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Tumour"/>
+  <rdfs:comment>Neoplasms of unspecified behaviour</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Vincristine">
+  <rdfs:subClassOf rdf:resource="#AntimicrotubuleAgent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#VincristineDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Vincristine"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#AntimicrotubuleAgentDrug"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Vital_reference"/>
+
+<owl:Class rdf:about="#Alive">
+  <rdfs:subClassOf rdf:resource="#Vital_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Dead">
+  <rdfs:subClassOf rdf:resource="#Vital_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Dead_Patient">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_vital_reference"/>
+      <owl:someValuesFrom rdf:resource="#Dead"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Patient"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Living_Patient">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_vital_reference"/>
+      <owl:someValuesFrom rdf:resource="#Alive"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Patient"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Unknown">
+  <rdfs:subClassOf rdf:resource="#Vital_reference"/>
+</owl:Class>
+
+<BehaviourCode0 rdf:about="#BehaviourCode0REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BehaviourCode0>
+
+<BehaviourCode1 rdf:about="#BehaviourCode1REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BehaviourCode1>
+
+<BehaviourCode2 rdf:about="#BehaviourCode2REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BehaviourCode2>
+
+<BehaviourCode3 rdf:about="#BehaviourCode3REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BehaviourCode3>
+
+<BehaviourCode5 rdf:about="#BehaviourCode5REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BehaviourCode5>
+
+<BehaviourCode6 rdf:about="#BehaviourCode6REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BehaviourCode6>
+
+<BehaviourCode9 rdf:about="#BehaviourCode9REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</BehaviourCode9>
+
+<C00_C14 rdf:about="#C00_C14_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C00_C14>
+
+<C15_C26 rdf:about="#C15_C26_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C15_C26>
+
+<C30_C39 rdf:about="#C30_C39_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C30_C39>
+
+<C40_C41 rdf:about="#C40_C41_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C40_C41>
+
+<C43_C44 rdf:about="#C43_C44_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C43_C44>
+
+<C45_C49 rdf:about="#C45_C49_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C45_C49>
+
+<C50_C50 rdf:about="#C50_C50_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C50_C50>
+
+<C51_C58 rdf:about="#C51_C58_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C51_C58>
+
+<C60_C63 rdf:about="#C60_C63_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C60_C63>
+
+<C64_C68 rdf:about="#C64_C68_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C64_C68>
+
+<C69_C72 rdf:about="#C69_C72_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C69_C72>
+
+<C73_C75 rdf:about="#C73_C75_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C73_C75>
+
+<C76_C80 rdf:about="#C76_C80_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C76_C80>
+
+<C7A_C7A rdf:about="#C7A_C7A_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C7A_C7A>
+
+<C7B_C7B rdf:about="#C7B_C7B_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C7B_C7B>
+
+<C81_C96 rdf:about="#C81_C96_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</C81_C96>
+
+<Drug rdf:about="#CP1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CyclophosphamideREF"/>
+  <Dose rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</Dose>
+</Drug>
+
+<Cyclophosphamide rdf:about="#CyclophosphamideREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Cyclophosphamide>
+
+<Capecitabine rdf:about="#CapecitabineREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Capecitabine>
+
+<Carboplatin rdf:about="#CarboplatinREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Carboplatin>
+
+<Cisplatin rdf:about="#CisplatinREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Cisplatin>
+
+<Cytarabine rdf:about="#CytarabineREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Cytarabine>
+
+<D00_D09 rdf:about="#D00_D09_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</D00_D09>
+
+<D10_D36 rdf:about="#D10_D36_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</D10_D36>
+
+<D37_D48 rdf:about="#D37_D48_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</D37_D48>
+
+<D3A_D3A rdf:about="#D3A_D3A_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</D3A_D3A>
+
+<D49_D49 rdf:about="#D49_D49_REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</D49_D49>
+
+<Docetaxel rdf:about="#DocetaxelREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Docetaxel>
+
+<Doxorubicin rdf:about="#DoxorubicinREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Doxorubicin>
+
+<Drug rdf:about="#E1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#EpirubicinREF"/>
+  <Dose rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">100</Dose>
+</Drug>
+
+<Epirubicin rdf:about="#EpirubicinREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Epirubicin>
+
+<Drug rdf:about="#F1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#Fluorouracil5REF"/>
+</Drug>
+
+<FU rdf:about="#Fluorouracil5REF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</FU>
+
+<Gemcitabine rdf:about="#GemcitabineREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Gemcitabine>
+
+<Hydroxycarbamide rdf:about="#HydroxycarbamideREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Hydroxycarbamide>
+
+<Infusion rdf:about="#InfusionREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Infusion>
+
+<Intramuscular rdf:about="#IntramuscularREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Intramuscular>
+
+<Intravenous rdf:about="#IntravenousREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Intravenous>
+
+<Oxaliplatin rdf:about="#OxaliplatinREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Oxaliplatin>
+
+<Paclitaxel rdf:about="#PaclitaxelREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Paclitaxel>
+
+<Patient rdf:about="#Patient1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_tumour rdf:resource="#Tumour1"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10262332</PatientID>
+</Patient>
+
+<Tumour rdf:about="#Tumour1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_behaviour_code rdf:resource="#BehaviourCode3REF"/>
+  <has_tumour_reference rdf:resource="#C50_C50_REF"/>
+  <ICD10_Code>C509</ICD10_Code>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003620</TumourID>
+</Tumour>
+
+<Pertuzumab rdf:about="#PertuzumabREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Pertuzumab>
+
+<Regimen rdf:about="#Regimen1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <contains rdf:resource="#CP1"/>
+  <contains rdf:resource="#E1"/>
+  <contains rdf:resource="#F1"/>
+</Regimen>
+
+<Rituximab rdf:about="#RituximabREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Rituximab>
+
+<Subcutaneous rdf:about="#SubcutaneousREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Subcutaneous>
+
+<Temozolomide rdf:about="#TemozolomideREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Temozolomide>
+
+<Trastuzumab rdf:about="#TrastuzumabREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Trastuzumab>
+
+<VincristineDrug rdf:about="#VincristineREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</VincristineDrug>
+
+<Alive rdf:about="#AliveREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Alive>
+
+<Dead rdf:about="#DeadREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Dead>
+
+<Unknown rdf:about="#UnknownVitalREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Unknown>
+
+
+</rdf:RDF>
