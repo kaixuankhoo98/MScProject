@@ -183,6 +183,15 @@ def map_data(onto, data_to_map,
                 return onto.D3A_D3A_REF
         return 0 # error case
 
+    def vital(onto, string):
+        if type(string) != str:
+            print("Vital status is not a string")
+            raise(WrongTypeError)
+        if string[0] == 'A':
+            return onto.AliveREF
+        if string[0] == 'D':
+            return onto.DeadREF
+        return onto.UnknownVitalREF
     
     ## --------------------- MAIN FUNCTION ---------------------
     def create_instances(data):
@@ -200,7 +209,7 @@ def map_data(onto, data_to_map,
                 yearBorn = datetime.date(today.year-row[patient_age],1,1).year if patient_age in data.columns else 0
                 thisPatient = onto.Patient(PatientID = [row[patient_id_col]], ## equivalent of NHS number 
                                             DateOfBirth = [yearBorn],
-                                            VitalStatus = [row[vital_status]],
+                                            has_vital_ref = [vital(onto, row[vital_status])],
                                             PrimaryDiagnosis = [row[patient_primary_diagnosis]], ## patient primary tumour icd10
                                             Sex = [row[sex_col]] if sex_col in data.columns else [0]
                                             )
@@ -212,11 +221,11 @@ def map_data(onto, data_to_map,
             tumour_search = onto.search(TumourID = str(row[tumour_id_col])+"*")
             if not tumour_search:
                 thisTumour = onto.Tumour(TumourID = [row[tumour_id_col]],
-                                            DiagnosisDate = [row[diagnosis_date_col]],
-                                            ICD10_Code = [row[tumour_icd10_col]] if tumour_icd10_col in data.columns else [0], ## tumour icd10
-                                            has_behaviour_code = [onto_behaviour_code(onto, row[tumour_behaviour_col])] if tumour_behaviour_col in data.columns else [0], # behaviour code
-                                            belongs_to_patient = [thisPatient],
-                                            has_tumour_reference = [tumour_icd10_code(onto, row[tumour_icd10_col])]
+                                            # DiagnosisDate = [row[diagnosis_date_col]],
+                                            # ICD10_Code = [row[tumour_icd10_col]] if tumour_icd10_col in data.columns else [0], ## tumour icd10
+                                            # has_behaviour_code = [onto_behaviour_code(onto, row[tumour_behaviour_col])] if tumour_behaviour_col in data.columns else [0], # behaviour code
+                                            belongs_to_patient = [thisPatient]
+                                            # has_tumour_reference = [tumour_icd10_code(onto, row[tumour_icd10_col])]
                                             )
             else:
                 thisTumour = tumour_search[0]
