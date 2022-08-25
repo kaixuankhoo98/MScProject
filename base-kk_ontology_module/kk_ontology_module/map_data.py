@@ -128,6 +128,11 @@ def map_data(onto, data_to_map,
         '''
         Converts string of ICD10 code to Tumour ICD10 code REF instance in ontology.
         '''
+        if type(code) != str:
+            return 0
+        if len(code) < 3:
+            return 0
+
         code1 = code[0] ## First letter
         code2 = code[1:3] ## First 2 numbers
         if code1 == "C":
