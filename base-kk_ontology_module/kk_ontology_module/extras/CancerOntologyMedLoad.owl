@@ -56,6 +56,11 @@ In this Ontology, the Drug_reference class contains reference individuals for th
   <rdfs:range rdf:resource="#Tumour_ICD10_reference"/>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="#has_vital_reference">
+  <rdfs:domain rdf:resource="#Patient"/>
+  <rdfs:range rdf:resource="#Vital_reference"/>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="#treated_by">
   <owl:inverseOf rdf:resource="#treats"/>
   <rdfs:domain rdf:resource="#Tumour"/>
@@ -65,11 +70,6 @@ In this Ontology, the Drug_reference class contains reference individuals for th
 <owl:ObjectProperty rdf:about="#treats">
   <rdfs:domain rdf:resource="#Regimen"/>
   <rdfs:range rdf:resource="#Tumour"/>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#has_vital_reference">
-  <rdfs:domain rdf:resource="#Patient"/>
-  <rdfs:range rdf:resource="#Vital_reference"/>
 </owl:ObjectProperty>
 
 <owl:DatatypeProperty rdf:about="#Behaviour_Code">
@@ -229,6 +229,12 @@ X = Exit Posting</rdfs:comment>
 
 <owl:Class rdf:about="#Tumour_ICD10_reference">
   <rdfs:comment xml:lang="en">Tumour references are the ICD-10 codes referring to the primary site of the tumour</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Vital_reference"/>
+
+<owl:Class rdf:about="#Alive">
+  <rdfs:subClassOf rdf:resource="#Vital_reference"/>
 </owl:Class>
 
 <owl:Class rdf:about="#AlkylatingAgent">
@@ -574,6 +580,20 @@ X = Exit Posting</rdfs:comment>
   <rdfs:subClassOf rdf:resource="#Tumour_ICD10_reference"/>
 </owl:Class>
 
+<owl:Class rdf:about="#Dead">
+  <rdfs:subClassOf rdf:resource="#Vital_reference"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Dead_Patient">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_vital_reference"/>
+      <owl:someValuesFrom rdf:resource="#Dead"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Patient"/>
+</owl:Class>
+
 <owl:Class rdf:about="#Docetaxel">
   <rdfs:subClassOf rdf:resource="#Taxane"/>
 </owl:Class>
@@ -789,6 +809,16 @@ X = Exit Posting</rdfs:comment>
   <rdfs:subClassOf rdf:resource="#Injection"/>
 </owl:Class>
 
+<owl:Class rdf:about="#Living_Patient">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_vital_reference"/>
+      <owl:someValuesFrom rdf:resource="#Alive"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Patient"/>
+</owl:Class>
+
 <owl:Class rdf:about="#Malignant_tumour">
   <rdfs:subClassOf rdf:resource="#Tumour"/>
 </owl:Class>
@@ -915,17 +945,6 @@ X = Exit Posting</rdfs:comment>
   <rdfs:subClassOf rdf:resource="#Regimen"/>
 </owl:Class>
 
-<owl:Class rdf:about="#TrastuzumabDrug">
-  <owl:equivalentClass>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#has_drug_reference"/>
-      <owl:onClass rdf:resource="#Trastuzumab"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </owl:equivalentClass>
-  <rdfs:subClassOf rdf:resource="#HER2TargetedDrug"/>
-</owl:Class>
-
 <owl:Class rdf:about="#Temozolomide">
   <rdfs:subClassOf rdf:resource="#AlkylatingAgent"/>
 </owl:Class>
@@ -953,6 +972,17 @@ X = Exit Posting</rdfs:comment>
     </owl:Restriction>
   </owl:equivalentClass>
   <rdfs:subClassOf rdf:resource="#HER2TargetedRegimen"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TrastuzumabDrug">
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has_drug_reference"/>
+      <owl:onClass rdf:resource="#Trastuzumab"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#HER2TargetedDrug"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Tumour_C71">
@@ -1218,6 +1248,10 @@ X = Exit Posting</rdfs:comment>
   <rdfs:comment>Neoplasms of unspecified behaviour</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#Unknown">
+  <rdfs:subClassOf rdf:resource="#Vital_reference"/>
+</owl:Class>
+
 <owl:Class rdf:about="#Vincristine">
   <rdfs:subClassOf rdf:resource="#AntimicrotubuleAgent"/>
 </owl:Class>
@@ -1233,39 +1267,9 @@ X = Exit Posting</rdfs:comment>
   <rdfs:subClassOf rdf:resource="#AntimicrotubuleAgentDrug"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Vital_reference"/>
-
-<owl:Class rdf:about="#Alive">
-  <rdfs:subClassOf rdf:resource="#Vital_reference"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Dead">
-  <rdfs:subClassOf rdf:resource="#Vital_reference"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Dead_Patient">
-  <owl:equivalentClass>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#has_vital_reference"/>
-      <owl:someValuesFrom rdf:resource="#Dead"/>
-    </owl:Restriction>
-  </owl:equivalentClass>
-  <rdfs:subClassOf rdf:resource="#Patient"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Living_Patient">
-  <owl:equivalentClass>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#has_vital_reference"/>
-      <owl:someValuesFrom rdf:resource="#Alive"/>
-    </owl:Restriction>
-  </owl:equivalentClass>
-  <rdfs:subClassOf rdf:resource="#Patient"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Unknown">
-  <rdfs:subClassOf rdf:resource="#Vital_reference"/>
-</owl:Class>
+<Alive rdf:about="#AliveREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Alive>
 
 <BehaviourCode0 rdf:about="#BehaviourCode0REF">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -1405,6 +1409,10 @@ X = Exit Posting</rdfs:comment>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </D49_D49>
 
+<Dead rdf:about="#DeadREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Dead>
+
 <Docetaxel rdf:about="#DocetaxelREF">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </Docetaxel>
@@ -1501,21 +1509,3596 @@ X = Exit Posting</rdfs:comment>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </Trastuzumab>
 
+<Unknown rdf:about="#UnknownVitalREF">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Unknown>
+
 <VincristineDrug rdf:about="#VincristineREF">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </VincristineDrug>
 
-<Alive rdf:about="#AliveREF">
+<Patient rdf:about="#patient1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Alive>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810037882</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1948</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
 
-<Dead rdf:about="#DeadREF">
+<Tumour rdf:about="#tumour1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Dead>
+  <belongs_to_patient rdf:resource="#patient1"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003527</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-04-07</DiagnosisDate>
+</Tumour>
 
-<Unknown rdf:about="#UnknownVitalREF">
+<Regimen rdf:about="#regimen1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</Unknown>
+  <treats rdf:resource="#tumour1"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005652</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen1"/>
+</Drug>
+
+<Regimen rdf:about="#regimen2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour1"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005653</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#RituximabREF"/>
+  <part_of_regimen rdf:resource="#regimen2"/>
+</Drug>
+
+<Regimen rdf:about="#regimen3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour1"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005654</RegimenID>
+</Regimen>
+
+<Patient rdf:about="#patient2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#DeadREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810089744</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1933</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient2"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003528</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-08-12</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen4">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour2"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005655</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen4"/>
+</Drug>
+
+<Patient rdf:about="#patient3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810127559</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1932</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient3"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003553</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-11-26</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen5">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour3"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005688</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug4">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen5"/>
+</Drug>
+
+<Regimen rdf:about="#regimen6">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour3"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007798</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug5">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen6"/>
+</Drug>
+
+<Regimen rdf:about="#regimen7">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour3"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005688</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug6">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen7"/>
+</Drug>
+
+<Regimen rdf:about="#regimen8">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour3"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007798</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug7">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen8"/>
+</Drug>
+
+<Patient rdf:about="#patient4">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810162550</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1938</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C504</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour4">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient4"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003554</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-04-10</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen9">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour4"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007799</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug8">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen9"/>
+</Drug>
+
+<Regimen rdf:about="#regimen10">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour4"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007799</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug9">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen10"/>
+</Drug>
+
+<Patient rdf:about="#patient5">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810230501</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1939</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C504</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour5">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient5"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003557</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-09-08</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen11">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour5"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005693</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug10">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen11"/>
+</Drug>
+
+<Regimen rdf:about="#regimen12">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour5"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005693</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug11">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen12"/>
+</Drug>
+
+<Patient rdf:about="#patient6">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810230548</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1955</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour6">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient6"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10006931</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-08-01</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen13">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour6"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007801</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug12">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen13"/>
+</Drug>
+
+<Regimen rdf:about="#regimen14">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour6"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007801</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug13">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen14"/>
+</Drug>
+
+<Patient rdf:about="#patient7">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810231893</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1935</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour7">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient7"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003561</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-10-23</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen15">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour7"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005698</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug14">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen15"/>
+</Drug>
+
+<Regimen rdf:about="#regimen16">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour7"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005698</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug15">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen16"/>
+</Drug>
+
+<Patient rdf:about="#patient8">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810231909</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1937</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour8">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient8"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000032</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-05-28</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen17">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour8"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000046</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug16">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen17"/>
+</Drug>
+
+<Drug rdf:about="#drug17">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen17"/>
+</Drug>
+
+<Regimen rdf:about="#regimen18">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour8"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000047</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug18">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CarboplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen18"/>
+</Drug>
+
+<Patient rdf:about="#patient9">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810233873</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1949</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour9">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient9"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005622</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-01-15</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen19">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour9"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007767</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug19">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CyclophosphamideREF"/>
+  <part_of_regimen rdf:resource="#regimen19"/>
+</Drug>
+
+<Regimen rdf:about="#regimen20">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour9"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007767</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug20">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CyclophosphamideREF"/>
+  <part_of_regimen rdf:resource="#regimen20"/>
+</Drug>
+
+<Regimen rdf:about="#regimen21">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour9"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007767</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug21">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CyclophosphamideREF"/>
+  <part_of_regimen rdf:resource="#regimen21"/>
+</Drug>
+
+<Tumour rdf:about="#tumour10">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient9"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005624</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-01-15</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen22">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour10"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10009054</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug22">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen22"/>
+</Drug>
+
+<Regimen rdf:about="#regimen23">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour10"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10009054</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug23">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen23"/>
+</Drug>
+
+<Regimen rdf:about="#regimen24">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour10"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10009054</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug24">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen24"/>
+</Drug>
+
+<Patient rdf:about="#patient10">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810234178</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1946</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour11">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient10"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10008317</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-05-20</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen25">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour11"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005705</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug25">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen25"/>
+</Drug>
+
+<Regimen rdf:about="#regimen26">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour11"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005706</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug26">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen26"/>
+</Drug>
+
+<Regimen rdf:about="#regimen27">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour11"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007803</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug27">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen27"/>
+</Drug>
+
+<Patient rdf:about="#patient11">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810235097</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1940</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour12">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient11"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003567</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-01-22</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen28">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour12"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007804</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug28">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen28"/>
+</Drug>
+
+<Regimen rdf:about="#regimen29">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour12"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007804</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug29">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen29"/>
+</Drug>
+
+<Patient rdf:about="#patient12">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810236230</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1949</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour13">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient12"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003187</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-03-26</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen30">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour13"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005099</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug30">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CyclophosphamideREF"/>
+  <part_of_regimen rdf:resource="#regimen30"/>
+</Drug>
+
+<Drug rdf:about="#drug31">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen30"/>
+</Drug>
+
+<Regimen rdf:about="#regimen31">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour13"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005099</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug32">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CyclophosphamideREF"/>
+  <part_of_regimen rdf:resource="#regimen31"/>
+</Drug>
+
+<Drug rdf:about="#drug33">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen31"/>
+</Drug>
+
+<Patient rdf:about="#patient13">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810238480</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1950</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour14">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient13"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003573</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-06-21</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen32">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour14"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005714</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug34">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen32"/>
+</Drug>
+
+<Regimen rdf:about="#regimen33">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour14"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005714</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug35">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen33"/>
+</Drug>
+
+<Patient rdf:about="#patient14">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810241016</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1937</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C504</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour15">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient14"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10008319</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-02-24</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen34">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour15"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007806</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug36">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen34"/>
+</Drug>
+
+<Regimen rdf:about="#regimen35">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour15"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007806</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug37">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen35"/>
+</Drug>
+
+<Patient rdf:about="#patient15">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810244038</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1966</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour16">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient15"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003582</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-03-06</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen36">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour16"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005722</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug38">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen36"/>
+</Drug>
+
+<Regimen rdf:about="#regimen37">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour16"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005722</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug39">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen37"/>
+</Drug>
+
+<Patient rdf:about="#patient16">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810245323</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1938</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour17">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient16"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005430</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-03-31</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen38">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour17"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007563</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen39">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour17"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007563</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen40">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour17"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007563</RegimenID>
+</Regimen>
+
+<Patient rdf:about="#patient17">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810245829</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1945</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour18">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient17"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003589</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-09-25</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen41">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour18"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005729</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug40">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen41"/>
+</Drug>
+
+<Regimen rdf:about="#regimen42">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour18"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005729</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug41">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen42"/>
+</Drug>
+
+<Tumour rdf:about="#tumour19">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient17"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003590</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-09-25</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen43">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour19"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007810</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug42">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen43"/>
+</Drug>
+
+<Regimen rdf:about="#regimen44">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour19"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007810</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug43">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen44"/>
+</Drug>
+
+<Patient rdf:about="#patient18">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810247058</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1968</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour20">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient18"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10006945</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-06-15</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen45">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour20"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005735</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug44">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen45"/>
+</Drug>
+
+<Regimen rdf:about="#regimen46">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour20"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005735</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug45">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen46"/>
+</Drug>
+
+<Patient rdf:about="#patient19">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810248439</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1986</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C504</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour21">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient19"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10006947</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-05-02</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen47">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour21"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005738</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug46">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen47"/>
+</Drug>
+
+<Regimen rdf:about="#regimen48">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour21"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005738</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug47">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen48"/>
+</Drug>
+
+<Tumour rdf:about="#tumour22">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient19"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10008322</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-05-02</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen49">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour22"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005739</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug48">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen49"/>
+</Drug>
+
+<Drug rdf:about="#drug49">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen49"/>
+</Drug>
+
+<Drug rdf:about="#drug50">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen49"/>
+</Drug>
+
+<Regimen rdf:about="#regimen50">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour22"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007813</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug51">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen50"/>
+</Drug>
+
+<Regimen rdf:about="#regimen51">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour22"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005739</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug52">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen51"/>
+</Drug>
+
+<Drug rdf:about="#drug53">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen51"/>
+</Drug>
+
+<Drug rdf:about="#drug54">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen51"/>
+</Drug>
+
+<Regimen rdf:about="#regimen52">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour22"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007813</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug55">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen52"/>
+</Drug>
+
+<Patient rdf:about="#patient20">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810250247</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1979</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour23">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient20"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003604</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-11-04</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen53">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour23"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10008708</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug56">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen53"/>
+</Drug>
+
+<Regimen rdf:about="#regimen54">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour23"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10008708</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug57">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen54"/>
+</Drug>
+
+<Tumour rdf:about="#tumour24">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient20"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003605</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-11-04</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen55">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour24"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10009061</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug58">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen55"/>
+</Drug>
+
+<Regimen rdf:about="#regimen56">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour24"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10009061</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug59">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen56"/>
+</Drug>
+
+<Patient rdf:about="#patient21">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810252742</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1940</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour25">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient21"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005437</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-03-13</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen57">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour25"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007568</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen58">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour25"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007568</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen59">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour25"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007568</RegimenID>
+</Regimen>
+
+<Patient rdf:about="#patient22">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810253278</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1933</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour26">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient22"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003206</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-10-06</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen60">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour26"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005129</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen61">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour26"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005130</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug60">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CytarabineREF"/>
+  <part_of_regimen rdf:resource="#regimen61"/>
+</Drug>
+
+<Regimen rdf:about="#regimen62">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour26"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005131</RegimenID>
+</Regimen>
+
+<Patient rdf:about="#patient23">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810254770</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1948</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour27">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient23"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003609</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-06-13</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen63">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour27"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005749</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug61">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen63"/>
+</Drug>
+
+<Regimen rdf:about="#regimen64">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour27"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005749</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug62">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen64"/>
+</Drug>
+
+<Tumour rdf:about="#tumour28">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient23"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003610</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-06-13</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen65">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour28"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005750</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug63">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen65"/>
+</Drug>
+
+<Drug rdf:about="#drug64">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen65"/>
+</Drug>
+
+<Drug rdf:about="#drug65">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen65"/>
+</Drug>
+
+<Regimen rdf:about="#regimen66">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour28"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007818</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug66">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen66"/>
+</Drug>
+
+<Regimen rdf:about="#regimen67">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour28"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007819</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug67">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen67"/>
+</Drug>
+
+<Drug rdf:about="#drug68">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen67"/>
+</Drug>
+
+<Drug rdf:about="#drug69">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen67"/>
+</Drug>
+
+<Regimen rdf:about="#regimen68">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour28"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10008709</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug70">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#RituximabREF"/>
+  <part_of_regimen rdf:resource="#regimen68"/>
+</Drug>
+
+<Regimen rdf:about="#regimen69">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour28"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005750</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug71">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen69"/>
+</Drug>
+
+<Drug rdf:about="#drug72">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen69"/>
+</Drug>
+
+<Drug rdf:about="#drug73">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen69"/>
+</Drug>
+
+<Regimen rdf:about="#regimen70">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour28"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007818</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug74">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen70"/>
+</Drug>
+
+<Regimen rdf:about="#regimen71">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour28"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007819</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug75">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen71"/>
+</Drug>
+
+<Drug rdf:about="#drug76">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen71"/>
+</Drug>
+
+<Drug rdf:about="#drug77">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen71"/>
+</Drug>
+
+<Regimen rdf:about="#regimen72">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour28"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10008709</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug78">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#RituximabREF"/>
+  <part_of_regimen rdf:resource="#regimen72"/>
+</Drug>
+
+<Patient rdf:about="#patient24">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810256899</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1927</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour29">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient24"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003612</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-08-08</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen73">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour29"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007820</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug79">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen73"/>
+</Drug>
+
+<Regimen rdf:about="#regimen74">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour29"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007820</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug80">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen74"/>
+</Drug>
+
+<Patient rdf:about="#patient25">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810258332</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1977</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour30">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient25"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005439</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-04-16</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen75">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour30"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007570</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen76">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour30"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007570</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen77">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour30"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007570</RegimenID>
+</Regimen>
+
+<Patient rdf:about="#patient26">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810258829</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1965</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C504</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour31">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient26"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003613</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-12-17</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen78">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour31"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007821</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug81">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen78"/>
+</Drug>
+
+<Regimen rdf:about="#regimen79">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour31"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007821</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug82">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen79"/>
+</Drug>
+
+<Patient rdf:about="#patient27">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810262332</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1991</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Regimen rdf:about="#regimen80">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#Tumour1"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005762</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug83">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen80"/>
+</Drug>
+
+<Patient rdf:about="#patient28">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810264459</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1960</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C504</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour32">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient28"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005440</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-06-08</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen81">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour32"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007571</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug84">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#RituximabREF"/>
+  <part_of_regimen rdf:resource="#regimen81"/>
+</Drug>
+
+<Regimen rdf:about="#regimen82">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour32"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007572</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug85">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CisplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen82"/>
+</Drug>
+
+<Patient rdf:about="#patient29">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810265007</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1944</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour33">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient29"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003623</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-07-30</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen83">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour33"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005765</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug86">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen83"/>
+</Drug>
+
+<Regimen rdf:about="#regimen84">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour33"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005765</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug87">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen84"/>
+</Drug>
+
+<Patient rdf:about="#patient30">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810266032</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1940</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour34">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient30"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10006959</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-03-24</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen85">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour34"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005767</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug88">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen85"/>
+</Drug>
+
+<Regimen rdf:about="#regimen86">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour34"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007826</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen87">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour34"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005767</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug89">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen87"/>
+</Drug>
+
+<Regimen rdf:about="#regimen88">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour34"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007826</RegimenID>
+</Regimen>
+
+<Patient rdf:about="#patient31">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810268105</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1951</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour35">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient31"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003538</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-08-18</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen89">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour35"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005668</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug90">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen89"/>
+</Drug>
+
+<Regimen rdf:about="#regimen90">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour35"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005669</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug91">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen90"/>
+</Drug>
+
+<Patient rdf:about="#patient32">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810269868</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1965</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour36">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient32"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005444</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-01-10</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen91">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour36"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007576</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen92">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour36"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10009292</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug92">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CyclophosphamideREF"/>
+  <part_of_regimen rdf:resource="#regimen92"/>
+</Drug>
+
+<Drug rdf:about="#drug93">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen92"/>
+</Drug>
+
+<Regimen rdf:about="#regimen93">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour36"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007576</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen94">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour36"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10009292</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug94">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CyclophosphamideREF"/>
+  <part_of_regimen rdf:resource="#regimen94"/>
+</Drug>
+
+<Drug rdf:about="#drug95">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen94"/>
+</Drug>
+
+<Regimen rdf:about="#regimen95">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour36"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007576</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen96">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour36"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10009292</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug96">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CyclophosphamideREF"/>
+  <part_of_regimen rdf:resource="#regimen96"/>
+</Drug>
+
+<Drug rdf:about="#drug97">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen96"/>
+</Drug>
+
+<Patient rdf:about="#patient33">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#DeadREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810271562</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1937</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour37">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient33"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000241</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-04-28</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen97">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour37"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000364</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug98">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen97"/>
+</Drug>
+
+<Drug rdf:about="#drug99">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen97"/>
+</Drug>
+
+<Regimen rdf:about="#regimen98">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour37"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000364</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug100">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen98"/>
+</Drug>
+
+<Drug rdf:about="#drug101">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen98"/>
+</Drug>
+
+<Patient rdf:about="#patient34">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810271784</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1959</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C504</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour38">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient34"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003630</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-07-06</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen99">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour38"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005773</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug102">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen99"/>
+</Drug>
+
+<Regimen rdf:about="#regimen100">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour38"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005773</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug103">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen100"/>
+</Drug>
+
+<Patient rdf:about="#patient35">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#DeadREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810276298</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1943</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour39">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient35"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003637</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-05-24</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen101">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour39"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005784</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug104">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen101"/>
+</Drug>
+
+<Regimen rdf:about="#regimen102">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour39"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005784</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug105">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen102"/>
+</Drug>
+
+<Patient rdf:about="#patient36">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810276568</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1945</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C501</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour40">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient36"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003641</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-06-27</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen103">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour40"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005789</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug106">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen103"/>
+</Drug>
+
+<Regimen rdf:about="#regimen104">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour40"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005789</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug107">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen104"/>
+</Drug>
+
+<Patient rdf:about="#patient37">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810277029</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1941</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour41">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient37"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003645</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-06-13</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen105">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour41"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007836</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug108">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen105"/>
+</Drug>
+
+<Regimen rdf:about="#regimen106">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour41"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007836</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug109">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen106"/>
+</Drug>
+
+<Patient rdf:about="#patient38">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810277795</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1931</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour42">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient38"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10006973</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-09-18</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen107">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour42"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007838</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug110">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen107"/>
+</Drug>
+
+<Patient rdf:about="#patient39">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810278698</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1940</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour43">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient39"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003652</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-04-04</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen108">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour43"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005801</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug111">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen108"/>
+</Drug>
+
+<Regimen rdf:about="#regimen109">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour43"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005801</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug112">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen109"/>
+</Drug>
+
+<Patient rdf:about="#patient40">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810278786</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1928</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C505</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour44">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient40"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003653</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-07-29</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen110">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour44"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005802</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug113">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen110"/>
+</Drug>
+
+<Regimen rdf:about="#regimen111">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour44"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005802</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug114">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen111"/>
+</Drug>
+
+<Patient rdf:about="#patient41">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810278853</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1947</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour45">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient41"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003654</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-05-30</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen112">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour45"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005803</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug115">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen112"/>
+</Drug>
+
+<Regimen rdf:about="#regimen113">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour45"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005803</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug116">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen113"/>
+</Drug>
+
+<Patient rdf:about="#patient42">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810279108</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1962</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour46">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient42"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003657</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-05-19</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen114">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour46"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007840</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug117">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen114"/>
+</Drug>
+
+<Regimen rdf:about="#regimen115">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour46"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10008716</RegimenID>
+</Regimen>
+
+<Tumour rdf:about="#tumour47">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient42"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003658</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-05-19</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen116">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour47"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10009064</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug118">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen116"/>
+</Drug>
+
+<Regimen rdf:about="#regimen117">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour47"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10009207</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug119">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#RituximabREF"/>
+  <part_of_regimen rdf:resource="#regimen117"/>
+</Drug>
+
+<Patient rdf:about="#patient43">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810279278</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1944</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour48">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient43"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003659</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-11-29</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen118">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour48"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005806</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug120">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen118"/>
+</Drug>
+
+<Patient rdf:about="#patient44">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810279595</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1981</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour49">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient44"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003661</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-08-15</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen119">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour49"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005808</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug121">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen119"/>
+</Drug>
+
+<Patient rdf:about="#patient45">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810279818</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1940</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour50">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient45"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003665</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-03-09</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen120">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour50"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005811</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug122">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen120"/>
+</Drug>
+
+<Regimen rdf:about="#regimen121">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour50"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005811</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug123">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen121"/>
+</Drug>
+
+<Patient rdf:about="#patient46">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810280094</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1949</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour51">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient46"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003668</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-12-07</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen122">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour51"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005813</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug124">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen122"/>
+</Drug>
+
+<Patient rdf:about="#patient47">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810280144</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1957</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour52">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient47"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003669</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-05-24</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen123">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour52"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005814</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug125">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen123"/>
+</Drug>
+
+<Regimen rdf:about="#regimen124">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour52"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005815</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen125">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour52"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005816</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen126">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour52"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005817</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug126">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen126"/>
+</Drug>
+
+<Regimen rdf:about="#regimen127">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour52"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005814</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug127">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen127"/>
+</Drug>
+
+<Regimen rdf:about="#regimen128">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour52"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005815</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen129">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour52"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005816</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen130">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour52"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005817</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug128">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen130"/>
+</Drug>
+
+<Patient rdf:about="#patient48">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810280576</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1939</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour53">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient48"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003670</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-01-31</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen131">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour53"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005818</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug129">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen131"/>
+</Drug>
+
+<Regimen rdf:about="#regimen132">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour53"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005819</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug130">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen132"/>
+</Drug>
+
+<Regimen rdf:about="#regimen133">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour53"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005818</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug131">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen133"/>
+</Drug>
+
+<Regimen rdf:about="#regimen134">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour53"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005819</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug132">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen134"/>
+</Drug>
+
+<Patient rdf:about="#patient49">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810280938</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1945</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C504</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour54">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient49"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003674</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-05-08</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen135">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour54"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007844</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug133">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen135"/>
+</Drug>
+
+<Patient rdf:about="#patient50">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#DeadREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810282350</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1945</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour55">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient50"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10006985</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-11-16</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen136">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour55"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007849</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug134">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen136"/>
+</Drug>
+
+<Regimen rdf:about="#regimen137">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour55"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007849</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug135">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen137"/>
+</Drug>
+
+<Patient rdf:about="#patient51">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810282430</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1983</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour56">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient51"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005450</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-12-17</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen138">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour56"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007581</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug136">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen138"/>
+</Drug>
+
+<Drug rdf:about="#drug137">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#Fluorouracil5REF"/>
+  <part_of_regimen rdf:resource="#regimen138"/>
+</Drug>
+
+<Drug rdf:about="#drug138">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#EpirubicinREF"/>
+  <part_of_regimen rdf:resource="#regimen138"/>
+</Drug>
+
+<Drug rdf:about="#drug139">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CyclophosphamideREF"/>
+  <part_of_regimen rdf:resource="#regimen138"/>
+</Drug>
+
+<Regimen rdf:about="#regimen139">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour56"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007581</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug140">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen139"/>
+</Drug>
+
+<Drug rdf:about="#drug141">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#Fluorouracil5REF"/>
+  <part_of_regimen rdf:resource="#regimen139"/>
+</Drug>
+
+<Drug rdf:about="#drug142">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#EpirubicinREF"/>
+  <part_of_regimen rdf:resource="#regimen139"/>
+</Drug>
+
+<Drug rdf:about="#drug143">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CyclophosphamideREF"/>
+  <part_of_regimen rdf:resource="#regimen139"/>
+</Drug>
+
+<Regimen rdf:about="#regimen140">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour56"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007581</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug144">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen140"/>
+</Drug>
+
+<Drug rdf:about="#drug145">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#Fluorouracil5REF"/>
+  <part_of_regimen rdf:resource="#regimen140"/>
+</Drug>
+
+<Drug rdf:about="#drug146">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#EpirubicinREF"/>
+  <part_of_regimen rdf:resource="#regimen140"/>
+</Drug>
+
+<Drug rdf:about="#drug147">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CyclophosphamideREF"/>
+  <part_of_regimen rdf:resource="#regimen140"/>
+</Drug>
+
+<Patient rdf:about="#patient52">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810282675</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1946</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour57">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient52"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10006986</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-02-10</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen141">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour57"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005832</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug148">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen141"/>
+</Drug>
+
+<Regimen rdf:about="#regimen142">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour57"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005833</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen143">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour57"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007850</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug149">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen143"/>
+</Drug>
+
+<Regimen rdf:about="#regimen144">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour57"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005832</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug150">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen144"/>
+</Drug>
+
+<Regimen rdf:about="#regimen145">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour57"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005833</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen146">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour57"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007850</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug151">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen146"/>
+</Drug>
+
+<Patient rdf:about="#patient53">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810282824</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1967</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour58">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient53"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003685</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-04-04</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen147">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour58"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005835</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug152">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#Fluorouracil5REF"/>
+  <part_of_regimen rdf:resource="#regimen147"/>
+</Drug>
+
+<Drug rdf:about="#drug153">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen147"/>
+</Drug>
+
+<Regimen rdf:about="#regimen148">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour58"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007852</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug154">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen148"/>
+</Drug>
+
+<Regimen rdf:about="#regimen149">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour58"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005835</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug155">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#Fluorouracil5REF"/>
+  <part_of_regimen rdf:resource="#regimen149"/>
+</Drug>
+
+<Drug rdf:about="#drug156">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen149"/>
+</Drug>
+
+<Regimen rdf:about="#regimen150">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour58"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007852</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug157">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen150"/>
+</Drug>
+
+<Patient rdf:about="#patient54">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810282967</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1941</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour59">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient54"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003688</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-10-17</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen151">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour59"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005837</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug158">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen151"/>
+</Drug>
+
+<Drug rdf:about="#drug159">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen151"/>
+</Drug>
+
+<Drug rdf:about="#drug160">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen151"/>
+</Drug>
+
+<Regimen rdf:about="#regimen152">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour59"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007854</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug161">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen152"/>
+</Drug>
+
+<Regimen rdf:about="#regimen153">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour59"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005837</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug162">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen153"/>
+</Drug>
+
+<Drug rdf:about="#drug163">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen153"/>
+</Drug>
+
+<Drug rdf:about="#drug164">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen153"/>
+</Drug>
+
+<Regimen rdf:about="#regimen154">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour59"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007854</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug165">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen154"/>
+</Drug>
+
+<Patient rdf:about="#patient55">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810283619</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1971</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour60">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient55"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003694</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-03-10</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen155">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour60"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10009208</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug166">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen155"/>
+</Drug>
+
+<Regimen rdf:about="#regimen156">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour60"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10009208</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug167">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen156"/>
+</Drug>
+
+<Patient rdf:about="#patient56">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810283669</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1953</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour61">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient56"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10006809</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-10-07</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen157">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour61"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005165</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen158">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour61"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005166</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen159">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour61"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005165</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen160">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour61"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005166</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen161">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour61"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005165</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen162">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour61"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005166</RegimenID>
+</Regimen>
+
+<Patient rdf:about="#patient57">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810284056</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1936</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour62">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient57"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003698</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-09-25</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen163">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour62"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10008719</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug168">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen163"/>
+</Drug>
+
+<Regimen rdf:about="#regimen164">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour62"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10008719</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug169">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen164"/>
+</Drug>
+
+<Patient rdf:about="#patient58">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810284128</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1940</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour63">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient58"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003699</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-08-10</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen165">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour63"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005842</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug170">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen165"/>
+</Drug>
+
+<Regimen rdf:about="#regimen166">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour63"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005842</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug171">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen166"/>
+</Drug>
+
+<Patient rdf:about="#patient59">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810284364</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1938</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour64">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient59"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003228</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-01-12</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen167">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour64"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005167</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen168">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour64"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005167</RegimenID>
+</Regimen>
+
+<Patient rdf:about="#patient60">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810284374</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1976</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour65">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient60"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10006991</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-10-19</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen169">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour65"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005843</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug172">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen169"/>
+</Drug>
+
+<Regimen rdf:about="#regimen170">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour65"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007860</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen171">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour65"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005843</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug173">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen171"/>
+</Drug>
+
+<Regimen rdf:about="#regimen172">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour65"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007860</RegimenID>
+</Regimen>
+
+<Patient rdf:about="#patient61">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810285163</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1944</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour66">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient61"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003702</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-09-17</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen173">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour66"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005845</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug174">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen173"/>
+</Drug>
+
+<Regimen rdf:about="#regimen174">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour66"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005845</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug175">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen174"/>
+</Drug>
+
+<Patient rdf:about="#patient62">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810285505</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1976</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour67">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient62"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003708</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-07-18</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen175">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour67"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007863</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug176">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen175"/>
+</Drug>
+
+<Regimen rdf:about="#regimen176">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour67"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007863</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug177">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen176"/>
+</Drug>
+
+<Patient rdf:about="#patient63">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810285724</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1957</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour68">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient63"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10006996</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-11-10</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen177">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour68"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005849</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug178">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen177"/>
+</Drug>
+
+<Regimen rdf:about="#regimen178">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour68"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007864</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug179">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen178"/>
+</Drug>
+
+<Regimen rdf:about="#regimen179">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour68"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005849</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug180">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen179"/>
+</Drug>
+
+<Regimen rdf:about="#regimen180">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour68"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007864</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug181">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen180"/>
+</Drug>
+
+<Patient rdf:about="#patient64">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810286064</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1964</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C504</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour69">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient64"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003711</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-05-15</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen181">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour69"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005852</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug182">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen181"/>
+</Drug>
+
+<Regimen rdf:about="#regimen182">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour69"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005852</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug183">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#PaclitaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen182"/>
+</Drug>
+
+<Patient rdf:about="#patient65">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810286363</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1951</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour70">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient65"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003713</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-03-24</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen183">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour70"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005854</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug184">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen183"/>
+</Drug>
+
+<Patient rdf:about="#patient66">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810286369</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1973</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C504</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour71">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient66"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003714</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-10-30</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen184">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour71"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005855</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug185">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen184"/>
+</Drug>
+
+<Regimen rdf:about="#regimen185">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour71"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005855</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug186">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen185"/>
+</Drug>
+
+<Patient rdf:about="#patient67">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#DeadREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810287556</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1967</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C504</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour72">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient67"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003721</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2013-02-07</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen186">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour72"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005861</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug187">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen186"/>
+</Drug>
+
+<Regimen rdf:about="#regimen187">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour72"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005862</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen188">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour72"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007866</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug188">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen188"/>
+</Drug>
+
+<Regimen rdf:about="#regimen189">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour72"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005861</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug189">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen189"/>
+</Drug>
+
+<Regimen rdf:about="#regimen190">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour72"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10005862</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen191">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour72"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007866</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug190">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen191"/>
+</Drug>
+
+<Patient rdf:about="#patient68">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810287916</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1969</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour73">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient68"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003723</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-09-11</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen192">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour73"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007867</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug191">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen192"/>
+</Drug>
+
+<Regimen rdf:about="#regimen193">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour73"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10008725</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug192">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen193"/>
+</Drug>
+
+<Regimen rdf:about="#regimen194">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour73"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007867</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug193">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#TrastuzumabREF"/>
+  <part_of_regimen rdf:resource="#regimen194"/>
+</Drug>
+
+<Regimen rdf:about="#regimen195">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour73"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10008725</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug194">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen195"/>
+</Drug>
+
+<Patient rdf:about="#patient69">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810288769</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1947</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour74">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient69"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000428</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2017-10-04</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen196">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour74"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000643</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug195">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen196"/>
+</Drug>
+
+<Drug rdf:about="#drug196">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen196"/>
+</Drug>
+
+<Drug rdf:about="#drug197">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#OxaliplatinREF"/>
+  <part_of_regimen rdf:resource="#regimen196"/>
+</Drug>
+
+<Patient rdf:about="#patient70">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#DeadREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810290463</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1930</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour75">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient70"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003733</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2014-11-10</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen197">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour75"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10007870</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug198">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#DocetaxelREF"/>
+  <part_of_regimen rdf:resource="#regimen197"/>
+</Drug>
+
+<Patient rdf:about="#patient71">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_vital_reference rdf:resource="#AliveREF"/>
+  <PatientID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">810290756</PatientID>
+  <DateOfBirth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1945</DateOfBirth>
+  <PrimaryDiagnosis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C509</PrimaryDiagnosis>
+  <Sex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Sex>
+</Patient>
+
+<Tumour rdf:about="#tumour76">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <belongs_to_patient rdf:resource="#patient71"/>
+  <TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000460</TumourID>
+  <DiagnosisDate rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2015-09-15</DiagnosisDate>
+</Tumour>
+
+<Regimen rdf:about="#regimen198">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour76"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000693</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug199">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen198"/>
+</Drug>
+
+<Drug rdf:about="#drug200">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen198"/>
+</Drug>
+
+<Regimen rdf:about="#regimen199">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour76"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000694</RegimenID>
+</Regimen>
+
+<Regimen rdf:about="#regimen200">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <treats rdf:resource="#tumour76"/>
+  <RegimenID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10000693</RegimenID>
+</Regimen>
+
+<Drug rdf:about="#drug201">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen200"/>
+</Drug>
+
+<Drug rdf:about="#drug202">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <has_drug_reference rdf:resource="#CapecitabineREF"/>
+  <part_of_regimen rdf:resource="#regimen200"/>
+</Drug>
 
 
 </rdf:RDF>
