@@ -111,6 +111,15 @@ In this Ontology, the Drug_reference class contains reference individuals for th
     
 
 
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#has_vital_reference -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#has_vital_reference">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Patient"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Vital_reference"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#part_of_regimen -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#part_of_regimen">
@@ -320,21 +329,11 @@ X = Exit Posting</rdfs:comment>
     
 
 
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CarboplatinDrug -->
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Alive -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CarboplatinDrug"/>
-    
-
-
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CyclophosphamideDrug -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CyclophosphamideDrug"/>
-    
-
-
-    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelDrug -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelDrug"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Alive">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Vital_reference"/>
+    </owl:Class>
     
 
 
@@ -844,6 +843,28 @@ X = Exit Posting</rdfs:comment>
     
 
 
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Dead -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Dead">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Vital_reference"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Dead_Patient -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Dead_Patient">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#has_vital_reference"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Dead"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Patient"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Docetaxel -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Docetaxel">
@@ -1120,6 +1141,20 @@ X = Exit Posting</rdfs:comment>
     
 
 
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Living_Patient -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Living_Patient">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#has_vital_reference"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Alive"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Patient"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Malignant_tumour -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Malignant_tumour">
@@ -1209,7 +1244,7 @@ X = Exit Posting</rdfs:comment>
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#contains"/>
-                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:minQualifiedCardinality>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
                 <owl:onClass rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Drug"/>
             </owl:Restriction>
         </owl:equivalentClass>
@@ -1409,24 +1444,6 @@ X = Exit Posting</rdfs:comment>
     <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#TAC -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#TAC">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#contains"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CyclophosphamideDrug"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#contains"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelDrug"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#contains"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#DoxorubicinDrug"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Regimen"/>
     </owl:Class>
     
@@ -1435,24 +1452,6 @@ X = Exit Posting</rdfs:comment>
     <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#TCH -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#TCH">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#contains"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#CarboplatinDrug"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#contains"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/BreastCancerOntology#DocetaxelDrug"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#contains"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#TrastuzumabDrug"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Regimen"/>
     </owl:Class>
     
@@ -1967,6 +1966,14 @@ X = Exit Posting</rdfs:comment>
     
 
 
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Unknown -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Unknown">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Vital_reference"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Vincristine -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Vincristine">
@@ -1990,6 +1997,12 @@ X = Exit Posting</rdfs:comment>
     
 
 
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Vital_reference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Vital_reference"/>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -1998,6 +2011,14 @@ X = Exit Posting</rdfs:comment>
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#AliveREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#AliveREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Alive"/>
+    </owl:NamedIndividual>
     
 
 
@@ -2275,6 +2296,14 @@ X = Exit Posting</rdfs:comment>
     
 
 
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#DeadREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#DeadREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Dead"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#DocetaxelREF -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#DocetaxelREF">
@@ -2451,6 +2480,14 @@ X = Exit Posting</rdfs:comment>
         <CancerOntology:has_tumour_reference rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#C50_C50_REF"/>
         <CancerOntology:ICD10_Code>C509</CancerOntology:ICD10_Code>
         <CancerOntology:TumourID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10003620</CancerOntology:TumourID>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#UnknownVitalREF -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#UnknownVitalREF">
+        <rdf:type rdf:resource="http://www.semanticweb.org/kaixuankhoo/ontologies/2022/6/CancerOntology#Unknown"/>
     </owl:NamedIndividual>
     
 
