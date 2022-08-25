@@ -208,8 +208,8 @@ def map_data(onto, data_to_map,
             if not tumour_search:
                 thisTumour = onto.Tumour(TumourID = [row[tumour_id_col]],
                                             DiagnosisDate = [row[diagnosis_date_col]],
-                                            ICD10_Code = [row[tumour_icd10_col]] if tumour_icd10_col in data.columns else 0, ## tumour icd10
-                                            has_behaviour_code = [onto_behaviour_code(onto, row[tumour_behaviour_col])] if tumour_behaviour_col in data.columns else 0, # behaviour code
+                                            ICD10_Code = [row[tumour_icd10_col]] if tumour_icd10_col in data.columns else [0], ## tumour icd10
+                                            has_behaviour_code = [onto_behaviour_code(onto, row[tumour_behaviour_col])] if tumour_behaviour_col in data.columns else [0], # behaviour code
                                             belongs_to_patient = [thisPatient],
                                             has_tumour_reference = [tumour_icd10_code(onto, row[tumour_icd10_col])]
                                             )
