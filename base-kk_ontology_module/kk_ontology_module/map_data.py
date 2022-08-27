@@ -209,7 +209,7 @@ def map_data(onto, data_to_map,
                 yearBorn = datetime.date(today.year-row[patient_age],1,1).year if patient_age in data.columns else 0
                 thisPatient = onto.Patient(PatientID = [row[patient_id_col]], ## equivalent of NHS number 
                                             DateOfBirth = [yearBorn],
-                                            has_vital_ref = [vital(onto, row[vital_status])],
+                                            has_vital_reference = [vital(onto, row[vital_status])],
                                             PrimaryDiagnosis = [row[patient_primary_diagnosis]], ## patient primary tumour icd10
                                             Sex = [row[sex_col]] if sex_col in data.columns else [0]
                                             )
